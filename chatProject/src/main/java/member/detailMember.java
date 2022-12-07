@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -27,11 +29,12 @@ public class detailMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userid=request.getParameter("userid");
+		HttpSession session = request.getSession();
+		String userid = (String)session.getAttribute("userid");
 		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
 		Member member=db.getMember(userid);
 		request.setAttribute("member", member);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("memberDetail.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/memberDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 

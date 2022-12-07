@@ -1,4 +1,4 @@
-package member;
+package board;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -7,20 +7,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import member.Member;
+import member.MemberRepositoryDB;
 
 import java.io.IOException;
 
 /**
- * Servlet implementation class UpdateMember
+ * Servlet implementation class UpdateBoard
  */
-@WebServlet("/updateMember")
-public class UpdateMember extends HttpServlet {
+@WebServlet("/UpdateBoard")
+public class UpdateBoard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMember() {
+    public UpdateBoard() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +31,11 @@ public class UpdateMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userid=request.getParameter("userid");
-		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
-		Member member=db.getMember(userid);
-		request.setAttribute("member", member);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("memberUpdate.jsp");
+		String id=request.getParameter("id");
+		BoardDB db=BoardDB.getInstance();
+		Board board=db.getBoard(id);
+		request.setAttribute("board", board);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("UpdateBoardForm.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -41,29 +43,23 @@ public class UpdateMember extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
 		String userid=request.getParameter("uid");
-		String pwd=request.getParameter("pwd1");
+		String title=request.getParameter("title");
 		String name=request.getParameter("name");
-		String email=request.getParameter("email");
-		String address=request.getParameter("address");
-		String phone=request.getParameter("phone");
-		String sex=request.getParameter("sex");
-		Member member=new Member();
-		member.setUid(userid);
-		member.setPwd(pwd);
-		member.setName(name);
-		member.setPhone(phone);
-		member.setEmail(email);
-		member.setAddress(address);
-		member.setSex(sex);
-		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
-		db.updateMember(member);
-		HttpSession session=request.getSession();
-		session.setAttribute("name",member.getName());
-		response.sendRedirect("index.jsp");
+		String id=request.getParameter("id");
+		String type=request.getParameter("type");
+		String content=request.getParameter("content");
+		Board board=new Board();
+		board.setUserid(userid);
+		board.setId(id);
+		board.setName(name);
+		board.setContent(content);
+		board.setType(type);
+		board.setTitle(title);
+		BoardDB db=BoardDB.getInstance();
+		db.updateBoard(board);
+		response.sendRedirect("boardList.jsp");
 	}
 
 }

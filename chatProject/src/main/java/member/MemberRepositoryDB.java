@@ -89,7 +89,9 @@ private MemberRepositoryDB(){}
 		                  rs.getString("SEX"),   
 		                  rs.getString("ADDRESS"),   
 		                  rs.getString("PHONE"), 
-		                  rs.getString("EMAIL")
+		                  rs.getString("EMAIL"),
+		                  rs.getString("ADMIN"),
+		                  rs.getString("LOGIN_CHECK")
 		                  );
 		            list.add(member);
 		         }
@@ -147,6 +149,9 @@ private MemberRepositoryDB(){}
 					   loginMember.setPwd(rs.getString("pwd"));
 					   loginMember.setEmail(rs.getString("email"));
 					   loginMember.setAddress(rs.getString("address"));
+					   loginMember.setSex(rs.getString("sex"));
+					   loginMember.setAdmin(rs.getString("admin"));
+					   loginMember.setLogin_check(rs.getString("login_check"));
 				   }
 			   }
 			   catch(SQLException e) {
@@ -198,27 +203,58 @@ private MemberRepositoryDB(){}
 			      }
 			   
 			   }
-		   public void login(String userid,String pwd) {
-			   open();
+		   public Member findPwd(Member member) {
+			   Member findMember=new Member();
+			  String sql="select * from chat_member where userid=? and phone=?";
+			  ResultSet rs=null;
 			   try {
-				pstmt=conn.prepareStatement("select * from chat_member where userid=?");
-				pstmt.setString(1, userid);
-				ResultSet rs = pstmt.executeQuery();
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-					if(rs.getString("PWD").equals(pwd)){
-						String name=rs.getString("name");
-						
-						}
-						 else{
-							 String result = "로그인 실패";
-						}
-					}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				   open();	
+				   pstmt=conn.prepareStatement(sql);
+				   pstmt.setString(1, member.getUid());
+				   pstmt.setString(2, member.getPhone());
+				   rs=pstmt.executeQuery();
+				   if(rs.next()) {
+					   findMember.setUid(rs.getString("userid"));
+					   findMember.setName(rs.getString("name"));
+					   findMember.setPwd(rs.getString("pwd"));
+					   findMember.setEmail(rs.getString("email"));
+					   findMember.setAddress(rs.getString("address"));
+				   }
+			   }
+			   catch(SQLException e) {
+				   e.printStackTrace();
+			   }
+			   finally {
+				   close();
+			   }
+			   return findMember;
 			   
+		   }
+		   public Member findId(Member member) {
+			   Member findMember=new Member();
+			  String sql="select * from chat_member where name=? and phone=?";
+			  ResultSet rs=null;
+			   try {
+				   open();	
+				   pstmt=conn.prepareStatement(sql);
+				   pstmt.setString(1, member.getName());
+				   pstmt.setString(2, member.getPhone());
+				   rs=pstmt.executeQuery();
+				   if(rs.next()) {
+					   findMember.setUid(rs.getString("userid"));
+					   findMember.setName(rs.getString("name"));
+					   findMember.setPwd(rs.getString("pwd"));
+					   findMember.setEmail(rs.getString("email"));
+					   findMember.setAddress(rs.getString("address"));
+				   }
+			   }
+			   catch(SQLException e) {
+				   e.printStackTrace();
+			   }
+			   finally {
+				   close();
+			   }
+			   return findMember;
 			   
 		   }
 		   public List listMembers(Member member) {
@@ -292,28 +328,7 @@ private MemberRepositoryDB(){}
 			   }
 			   return result;
 		   }
-		   public void insert(String userid,String pwd,String name,String address,String sex,String phone,String email) { 
-			   try {
-			         open();			       
-			         pstmt = conn.prepareStatement("insert into chat_member (USERID, PWD, NAME,ADDRESS,SEX, PHONE,EMAIL) values (?,?,?,?,?,?,?)");
-			         pstmt.setString(1,userid);
-			         pstmt.setString(2,pwd);
-			         pstmt.setString(3,name);
-			         pstmt.setString(4,address);
-			         pstmt.setString(5,sex);
-			         pstmt.setString(6,phone);
-			         pstmt.setString(7,email);
-			         pstmt.executeUpdate();
-			         pstmt.close();
-			         
-			      } catch (Exception e) {
-			         e.printStackTrace();
-			      } finally {
-			         close();
-			      }
-			   
-			   }
-			   
+
 			   
 		   }
 //		   public static void main(String [] args) {

@@ -1,4 +1,4 @@
-package member;
+package board;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,16 +10,16 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class BoardView
  */
-@WebServlet("/logout")
-public class Logout extends HttpServlet {
+@WebServlet("/boardList/view")
+public class BoardView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public BoardView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,14 +28,18 @@ public class Logout extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		if(session.getAttribute("userid")!=null) {
-			session.removeAttribute("userid");
+		BoardDB db=BoardDB.getInstance();
+		String id = request.getParameter("id");
+		Board viewBoard = db.getBoard(id);
+		HttpSession session = request.getSession();
+		String userid = (String)session.getAttribute("userid");
+		if (userid != null && viewBoard != null &&  userid.equals(viewBoard.getUserid())) {
+			request.setAttribute("updated", true);	
+		} else {
+			request.setAttribute("updated", false);	
 		}
-		if(session.getAttribute("name")!=null) {
-			session.removeAttribute("name");
-		}
-		response.sendRedirect("index.jsp");
+		request.setAttribute("viewBoard", viewBoard);	
+		request.getRequestDispatcher("/BoardView.jsp").forward(request, response);
 	}
 
 	/**

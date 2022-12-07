@@ -10,16 +10,16 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class DeleteMember
  */
-@WebServlet("/logout")
-public class Logout extends HttpServlet {
+@WebServlet("/DeleteMember")
+public class DeleteMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public DeleteMember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,13 +28,11 @@ public class Logout extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		if(session.getAttribute("userid")!=null) {
-			session.removeAttribute("userid");
-		}
-		if(session.getAttribute("name")!=null) {
-			session.removeAttribute("name");
-		}
+		HttpSession session = request.getSession();
+		String userid = (String)session.getAttribute("userid");
+		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+		db.delete(userid);
+		session.invalidate();
 		response.sendRedirect("index.jsp");
 	}
 

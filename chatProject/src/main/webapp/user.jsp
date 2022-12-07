@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-      <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>회원 정보 수정</title>
+    <title>회원 가입</title>
     <style>
       #container {
         width:600px;
@@ -15,6 +15,11 @@
       }
       #buttons{
        justify-content: center;
+       }
+       .side{
+       position:sticky;
+       position:-webkit-sticky;
+       top:-60px;
        }
       ul{
    list-style:none;
@@ -32,19 +37,19 @@
    }
     </style>
    
-    <script type="text/javascript" src="userCheck.js"></script>
+<script type="text/javascript" src="userCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="css/register.css">
   </head>
   <body> 
   <jsp:include page="index.jsp"/>
     <div id="container">
-      <h1 class="header">회원정보수정</h1>
-      <form action ="updateMember" method="post" name="userForm">
+      <h1 class="header">회원 가입</h1>
+      <form action ="register" method="post" name="userForm">
         <fieldset>
   
      <div class="form-floating">
-      <input type="text" value="${userid}"class="form-control" id="uid"name="uid" placeholder="id" readonly="readonly">
+      <input type="text" class="form-control" id="uid"name="uid" placeholder="id">
       <label for="floatingInput">아이디</label>
     </div>
   
@@ -68,10 +73,7 @@
       <input type="email" class="form-control" id="email"name="email" placeholder="email">
       <label for="floatingInput">이메일</label>
     </div>
-<!--   <div class="mb-3"> -->
-<!--     <label for="exampleInputPassword1" class="form-label">주소</label> -->
-<!--     <input type="text" class="form-control" id="address" name="address"> -->
-<!--   </div> -->
+
    <div class="form-floating">
       <input type="text" class="form-control" id="address"name="address" placeholder="address">
       <label for="floatingInput">주소</label>
@@ -89,7 +91,7 @@
          
         </fieldset>
         <div id="buttons">
-          <input type="submit" class="btn btn-secondary" value="수정하기"onclick="return check()">
+          <input type="submit" class="btn btn-secondary" value="가입하기"onclick="return check()">
           <input type="reset" class="btn btn-secondary" onclick="location.href='index.jsp'"  value="취소">
 
         </div>

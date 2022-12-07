@@ -20,9 +20,11 @@ public class Member implements Serializable {
 	private String address;
 	private String phone;
 	private String email;
+	private String admin;
+	private String login_check;
 
 	
-	public Member(String uid, String pwd, String name, String sex, String address, String phone,String email) {
+	public Member(String uid, String pwd, String name, String sex, String address, String phone,String email,String admin,String login_check) {
 		super();
 		this.uid = uid;
 		this.pwd = pwd;
@@ -31,6 +33,8 @@ public class Member implements Serializable {
 		this.address = address;
 		this.phone = phone;
 		this.email=email;
+		this.admin=admin;
+		this.login_check= login_check;
 	}
 	
 	public Member(JSONObject jsonObject) {
@@ -41,6 +45,8 @@ public class Member implements Serializable {
 		address = jsonObject.getString("address");
 		phone = jsonObject.getString("phone");
 		email= jsonObject.getString("email");
+		admin= jsonObject.getString("admin");
+		login_check= jsonObject.getString("login_check");
 	}
 	
 	public Member() {
@@ -90,6 +96,8 @@ public class Member implements Serializable {
         jsonMember.put("address", address);
         jsonMember.put("phone", phone);
         jsonMember.put("email", email);
+        jsonMember.put("admin", admin);
+        jsonMember.put("login_check", login_check);
         return jsonMember;
     }
 

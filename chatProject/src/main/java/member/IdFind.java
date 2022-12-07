@@ -10,16 +10,16 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class IdFind
  */
-@WebServlet("/logout")
-public class Logout extends HttpServlet {
+@WebServlet("/IdFind")
+public class IdFind extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public IdFind() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +28,25 @@ public class Logout extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		if(session.getAttribute("userid")!=null) {
-			session.removeAttribute("userid");
-		}
-		if(session.getAttribute("name")!=null) {
-			session.removeAttribute("name");
-		}
-		response.sendRedirect("index.jsp");
+	      String name=request.getParameter("name");
+	      String phone=request.getParameter("phone");
+	      MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+	      Member member=new Member();
+	      member.setName(name);
+	      member.setPhone(phone);
+	      Member result= db.findId(member);
+	      HttpSession session=request.getSession();
+	      if(result!=null&&result.getName()!=null) {
+	    	  session.setAttribute("id", result.getUid());
+	    	  response.sendRedirect("IdResult.jsp");	  
+	      }
+	      else {
+	    	  response.sendRedirect("FindId.jsp");
+	      }
+	      response.setContentType("text/html; charset=utf-8");
 	}
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

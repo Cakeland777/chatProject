@@ -1,11 +1,7 @@
 
 function check() {
     if (document.userForm.uid.value == "") {
-		Swal.fire(
-	  '아이디를 입력해주세요',
-	  '',
-	  'warning'
-	)
+		Swal.fire('아이디를 입력해주세요','','warning')
    
         document.userForm.uid.focus();
         return false;

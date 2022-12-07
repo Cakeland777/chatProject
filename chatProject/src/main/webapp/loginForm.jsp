@@ -47,8 +47,8 @@
       <label for="floatingPassword">비밀번호</label>
     </div>
     <div id="buttons">
-          <input type="submit" class="btn btn-secondary" value="로그인" onclick="return check()">
-        <input type="reset" class="btn btn-secondary"onclick="location.href='index.html'"  value="취소">
+          <input type="submit" class="btn btn-secondary" value="로그인">
+        <input type="reset" class="btn btn-secondary"onclick="location.href='index.jsp'"  value="취소">
         </div>
    
   </form>
