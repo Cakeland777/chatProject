@@ -33,6 +33,10 @@
    .form-floating{
    margin:10px;
    }
+   .textcontainer{
+  padding: 5px;
+   
+   }
     </style>
    
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -72,13 +76,13 @@
 
 <!--   <textarea class="form-control"id="content"name="content"  rows="3"placeholder="내용"></textarea> -->
 <!-- </div> -->
-<div class="container">
+<div class="textcontainer">
   <textarea class="summernote" name="content"></textarea>    
 </div>
 <script>
 $('.summernote').summernote({
-	  height: 300, 
-	  width:1000,// 에디터 높이
+	  height: 150, 
+	  width:600,
 	  minHeight: null,             // 최소 높이
 	  maxHeight: null,  
 	  lang: "ko-KR",

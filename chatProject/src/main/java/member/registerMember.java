@@ -51,31 +51,22 @@ public class registerMember extends HttpServlet {
 	      int result=db.insertMember(member);
 	      HttpSession session=request.getSession();
 	      if (result==1) {
-	    	  
 	    	  session.setAttribute("userid", userid);
-	    	  request.setAttribute("message", "가입성공");
+	    	  response.setContentType("text/html; charset=UTF-8");
+	    	  PrintWriter writer = response.getWriter();
+	    	  writer.println("<script>alert('가입성공');location.href='"+"loginForm.jsp"+"';</script>");  
+
+	    	  writer.close();
+	    	  
 	      }
 	      else {
-	    	  request.setAttribute("message", "가입실패");
+	    	  response.setContentType("text/html; charset=UTF-8");
+	    	  PrintWriter writer = response.getWriter();
+	    	  writer.println("<script>alert('가입실패'); location.href='"+"loginForm.jsp"+"';</script>"); 
+	    	  writer.close();
 	      }
-	      RequestDispatcher dispatcher=request.getRequestDispatcher("loginForm.jsp");
-	      dispatcher.forward(request, response);
-	      response.setContentType("text/html; charset=utf-8");
-	      PrintWriter out = response.getWriter();
-	      String html = """
-	<!DOCTYPE html>
-	<html>
-	<head>
-	<meta charset="UTF-8">
-	<title>로그인 창</title>
-	</head>
-	<body>
-	등록완료
-	<a href="index.html">메인</a>
-	</body>
-	</html>
-	            """;
-	      out.println(html);
+
+
 	}
 
 	/**

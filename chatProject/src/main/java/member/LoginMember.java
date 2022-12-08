@@ -38,22 +38,15 @@ public class LoginMember extends HttpServlet {
 	      member.setPwd(pwd);
 	      Member result= db.login(member);
 	      HttpSession session=request.getSession();
-	      if(result!=null&&result.getName()!=null) {
+	      if(result!=null&&result.getName()!=null&&result.getLogin_check().equals("T")) {
 	    	  session.setAttribute("userid", result.getUid());
 	    	  session.setAttribute("name",result.getName());
 	    	  session.setAttribute("admin",result.getAdmin());
 	    	  response.sendRedirect("index.jsp");	  
 	      }
 	      
-	      else if(result==null) {
-	    	  response.setContentType("text/html; charset=UTF-8");
-	    	  PrintWriter writer = response.getWriter();
-	    	  writer.println("<script>alert('아이디 혹은 비밀번호를 확인해주세요'); location.href='"+"loginForm.jsp"+"';</script>"); 
-	    	  writer.close();
-	    	  
-	    	  
-	      }
-	      else if(result!=null&&result.getLogin_check().equals("F")) {
+
+	      else if(result!=null&&result.getLogin_check()!=null&&result.getLogin_check().equals("F")) {
 	    	  response.setContentType("text/html; charset=UTF-8");
 	    	  PrintWriter writer = response.getWriter();
 	    	  writer.println("<script>alert('미사용 회원입니다. 관리자에게 문의해주세요'); location.href='"+"loginForm.jsp"+"';</script>"); 
@@ -67,8 +60,7 @@ public class LoginMember extends HttpServlet {
 	    	  writer.close();
 	    	  
 	      }
-	      
-	}
+	  }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

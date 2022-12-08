@@ -8,5 +8,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-
+  <servlet>
+    <description></description>
+    <display-name>Chatting</display-name>
+    <servlet-name>Chatting</servlet-name>
+    <servlet-class>chat.Chatting</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Chatting</servlet-name>
+    <url-pattern>/Chatting</url-pattern>
+  </servlet-mapping>
 </web-app>

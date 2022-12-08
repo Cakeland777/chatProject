@@ -32,7 +32,7 @@
    }
     </style>
    
-    <script type="text/javascript" src="userCheck.js"></script>
+    <script type="text/javascript" src="updateCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="css/register.css">
   </head>

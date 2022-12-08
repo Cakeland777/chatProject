@@ -122,6 +122,7 @@ private MemberRepositoryDB(){}
 					   updateMember.setAddress(rs.getString("address"));
 					   updateMember.setSex(rs.getString("sex"));
 					   updateMember.setPhone(rs.getString("phone"));
+					   updateMember.setLogin_check(rs.getString("login_check"));
 				   }
 			   }
 			   catch(SQLException e) {
@@ -257,6 +258,39 @@ private MemberRepositoryDB(){}
 			   return findMember;
 			   
 		   }
+		   public void ChangeStatus(String id) {
+			   
+			   Member member=getMember(id);
+			   String status=member.getLogin_check();
+			   String sql=null;
+			   if(status.equals("T")) {
+  
+				   sql="update chat_member set login_check='F' where userid=?";
+			   }
+			   else {
+				   
+				   sql="update chat_member set login_check='T' where userid=?";
+			   }
+			
+				   try {
+					   open();
+					   pstmt=conn.prepareStatement(sql);
+					   pstmt.setString(1, id);
+
+					   pstmt.executeUpdate();
+				   }catch (Exception e){
+					   e.printStackTrace();
+					   
+				   }
+				   finally {
+					   
+					   close();
+				   }
+				   
+			
+			   
+			   
+		   }
 		   public List listMembers(Member member) {
 			   List membersList=new ArrayList();
 			   String _name=member.getName();
@@ -283,6 +317,7 @@ private MemberRepositoryDB(){}
 					   String address=rs.getString("address");
 					   String sex=rs.getString("sex");
 					   String phone=rs.getString("phone");
+					   String login_check=rs.getString("login_check");
 					   Member vo=new Member();
 					   vo.setUid(id);
 					   vo.setPwd(pwd);
@@ -291,6 +326,7 @@ private MemberRepositoryDB(){}
 					   vo.setSex(sex);
 					   vo.setAddress(address);
 					   vo.setPhone(phone);
+					   vo.setLogin_check(login_check);
 					   membersList.add(vo);
 					 
 				   
@@ -303,7 +339,7 @@ private MemberRepositoryDB(){}
 			   return membersList; 
 			   
 		   }
-		   public int insertMember(Member member) {
+		   public int insertMember(Member member)  {
 			   int result=-1;
 			
 			   String sql="insert into chat_member (USERID, PWD, NAME,ADDRESS,SEX, PHONE,EMAIL) values (?,?,?,?,?,?,?) ";

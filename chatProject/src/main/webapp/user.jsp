@@ -43,6 +43,7 @@
   </head>
   <body> 
   <jsp:include page="index.jsp"/>
+  <article>
     <div id="container">
       <h1 class="header">회원 가입</h1>
       <form action ="register" method="post" name="userForm">

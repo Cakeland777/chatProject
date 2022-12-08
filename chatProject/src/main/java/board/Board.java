@@ -20,8 +20,9 @@ public class Board implements Serializable {
 	private String time;
 	private String type;
 	private String name;
+	private int count;
 	
-	public Board(String id, String userid, String title, String content, String type, String time, String name) {
+	public Board(String id, String userid, String title, String content, String type, String time, String name,int count) {
 		super();
 		this.id = id;
 		this.userid = userid;
@@ -30,6 +31,7 @@ public class Board implements Serializable {
 		this.type = type;
 		this.time = time;
 		this.name=name;
+		this.count=count;
 	}
 	
 	public Board(JSONObject jsonObject) {
@@ -40,6 +42,7 @@ public class Board implements Serializable {
 		type = jsonObject.getString("type");
 		time= jsonObject.getString("time");
 		name= jsonObject.getString("name");
+		count=jsonObject.getInt("count");
 	}
 	
 	public Board() {
@@ -53,6 +56,7 @@ public class Board implements Serializable {
 	        jsonBoard.put("type", type);
 	        jsonBoard.put("time", time);
 	        jsonBoard.put("name", name);
+	        jsonBoard.put("count", count);
 	        return jsonBoard;
 	    }
 }

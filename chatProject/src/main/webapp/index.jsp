@@ -62,6 +62,7 @@ function btn(){
 </script>
 <h1 class="header"><a href="/chatProject/index.jsp"><i class="bi bi-house-fill" color="white" ></a></i></h1>
 <%if(id==null){%>
+
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
@@ -86,6 +87,7 @@ function btn(){
     <a href="FindPwd.jsp" class="btn btn-outline-info stretched-link">비밀번호찾기</a>
   </div>
 </div>
+
 </body>
 </html>
 
@@ -96,6 +98,12 @@ else if(admin.equals("1")){%>
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
     <a href="member.jsp" class="btn btn-outline-info stretched-link">가입회원 확인</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+<i class="bi bi-card-text"color="mediumturquoise"  width="20" height="20"></i>
+    <a href="boardList.jsp" class="btn btn-outline-info stretched-link">게시판</a>
   </div>
 </div>
 <div class="card" style="width: 18rem;">

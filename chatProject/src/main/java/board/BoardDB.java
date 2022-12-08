@@ -75,7 +75,8 @@ private BoardDB(){}
 		                  rs.getString("CONTENT"),   
 		                  rs.getString("TYPE"),   
 		                  rs.getString("TIME"),
-		                  rs.getString("NAME")
+		                  rs.getString("NAME"),
+		                  rs.getInt("COUNT")
 		            );
 		            list.add(board);
 		         }
@@ -117,7 +118,7 @@ private BoardDB(){}
 		   List boardList=new ArrayList();
 		   try {
 			  open();
-			   String sql="select * from board order by id desc";
+			   String sql="select * from board order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
 				   pstmt=conn.prepareStatement(sql);
 
 			   ResultSet rs=pstmt.executeQuery();
@@ -129,6 +130,7 @@ private BoardDB(){}
 				   String content=rs.getString("content");
 				   String time=rs.getString("time");
 				   String type=rs.getString("type");
+				   int count=rs.getInt("count");
 				   Board vo=new Board();
 				   vo.setId(id);
 				   vo.setUserid(userid);
@@ -137,6 +139,7 @@ private BoardDB(){}
 				   vo.setTime(time);
 				   vo.setName(name);
 				   vo.setType(type);
+				   vo.setCount(count);
 				   boardList.add(vo);
    
 			   }
@@ -161,7 +164,9 @@ private BoardDB(){}
 		}
 		
 		public Board getBoard(String id) {
+			updateCount(id);
 			 open();
+			 
 			String sql = "select * from board where id=?";
 			Board viewBoard = new Board();
 			
@@ -179,6 +184,7 @@ private BoardDB(){}
 					viewBoard.setTime(rs.getString("time"));
 					viewBoard.setName(rs.getString("name"));
 					viewBoard.setType(rs.getString("type"));
+					viewBoard.setCount(rs.getInt("count"));
 				}
 				
 			} catch (SQLException e) {
@@ -227,42 +233,58 @@ private BoardDB(){}
 			   
 			   return result;
 		   }
+		   public void updateCount(String id) {
+			   String sql="update board set count = count +1 where id=?";
+			   try {
+				   open();
+				   pstmt=conn.prepareStatement(sql);
+				   pstmt.setString(1, id);
+				   pstmt.executeUpdate();
+			   }catch (Exception e){
+				   e.printStackTrace();
+				   
+			   }
+			   finally {
+				   
+				   close();
+			   }
+		   }
 	   public List searchBoards(String type,String content) {
 		   List boardList=new ArrayList();
 		   try {
 			  open();
 			   String sql="select * from board";
+			   if((content!=null&&content.length()!=0)) {
+				   
 			   if(type.equals("title") ){				   
-				   sql+=" where title like ? order by id desc";
+				   sql+=" where title like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
 				   pstmt=conn.prepareStatement(sql);
 				   pstmt.setString(1,"%"+content+"%");
 				   
 			   } else if(type.equals("content") ) {
-				   sql+=" where content like ? order by id desc";
+				   sql+=" where content like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),id desc";
 				   pstmt=conn.prepareStatement(sql);
 				   pstmt.setString(1,"%"+content+"%");
 			   }
 				else if(type.equals("all")) {
-			   		sql+=" where (name || content || userid || title) like ? order by id desc";	   		
+			   		sql+=" where (name || content || userid || title) like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";	   		
 				   pstmt=conn.prepareStatement(sql);
 				   pstmt.setString(1,"%"+content+"%");
 			   }
 				else if(type.equals("userid")) {
-			   		sql+=" where userid like ? order by id desc";   		
+			   		sql+=" where userid like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";   		
 				   pstmt=conn.prepareStatement(sql);
 				   pstmt.setString(1,"%"+content+"%");
 			   }
 				else if(type.equals("username")) {
-			   		sql+=" where name like ? order by id desc";   		
+			   		sql+=" where name like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";   		
 				   pstmt=conn.prepareStatement(sql);
 				   pstmt.setString(1,"%"+content+"%");
-			   }
-			   else if(type!=null&&type.length()!=0 ) {
-				   sql+=" order by id desc";
+			   }}
+			   else {
+				   sql+=" order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
 				   pstmt=conn.prepareStatement(sql);
-		
 			   }
-			   
 			   ResultSet rs=pstmt.executeQuery();
 			   while(rs.next()) {
 				   String id=rs.getString("id");
@@ -272,6 +294,7 @@ private BoardDB(){}
 				   String type1=rs.getString("type");
 				   String time=rs.getString("time");
 				   String name=rs.getString("name");
+				   int count=rs.getInt("count");
 				   Board vo=new Board();
 				   vo.setId(id);
 				   vo.setUserid(userid);
@@ -280,9 +303,8 @@ private BoardDB(){}
 				   vo.setType(type1);
 				   vo.setTime(time);
 				   vo.setName(name);
+				   vo.setCount(count);
 				   boardList.add(vo);
-				 
-			   
 			   }
 			   close();
 			   
@@ -290,6 +312,5 @@ private BoardDB(){}
 			   e.printStackTrace();
 		   }
 		   return boardList; 
-		   
 	   }
 }

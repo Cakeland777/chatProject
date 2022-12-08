@@ -15,8 +15,22 @@ background-color:lightblue;
 color:white;
 }
 #buttons{
-
-align-content: left;
+	text-align: center;
+}
+.search{
+text-align: center;
+}
+ a:link, a:visited {
+     background-color: darkgrey;
+     color: white;
+     padding: 10px 15px;
+     text-align: center;
+     text-decoration: none;
+     display: block;
+     
+}
+ a:hover, a:active {
+     background-color: skyblue;
 }
 
 </style>
@@ -33,13 +47,15 @@ align-content: left;
    MemberRepositoryDB db=MemberRepositoryDB.getInstance();
    List membersList=db.listMembers(member);
 %>
+<div class="search">
 <form method="post" action="member.jsp">
 이름:<input type="text" name="name">
-<input type="submit" value=" 조회하기">
+<input type="submit"class="btn btn-outline-secondary" style="margin-bottom: 5px;" value=" 조회하기">
 
-</form>
+</form></div>
  <table border='1' width='800' align='center'>
    <tr align='center'  bgcolor='lightblue'> 
+   <div class="title">
      <td>아이디</td>
      <td>비밀번호</td>
      <td>이름</td>
@@ -47,6 +63,9 @@ align-content: left;
      <td>주소</td>
      <td>전화번호</td>
      <td>성별</td>
+     <td></td>
+     <td></td>
+     </div>
 </tr>
 <%	
    for (int i=0; i < membersList.size(); i++){
@@ -58,6 +77,7 @@ align-content: left;
       String address=vo.getAddress();
       String sex=vo.getSex();
       String phone=vo.getPhone();
+      String login_check=vo.getLogin_check();
 %>
      <tr align=center>
        <td><%= id %></td>
@@ -67,15 +87,26 @@ align-content: left;
        <td><%=address  %></td>
        <td><%=phone  %></td>
        <td><%=sex %></td>
-     </tr>
-   
+       
+       <td><div id="buttons">
+          <a href="adminDelete?id=<%=id %>">탈퇴처리</a>
+      <%if(login_check.equals("T")){%>
+          <td><a href="adminUse?id=<%=id %>">미사용변경</a>
+          </div></td>
+          <%}
+else{%>
+ 		<td><a href="adminUse?id=<%=id %>">사용변경</a>
+          </div></td>
+     
+   <%}%>
+   </tr>
 <%		
    }
 %>	
     
 </table>
    <div id="buttons">
-          <input type="reset" class="btn btn-secondary" onclick="location.href='index.jsp'"  value="돌아가기">
+          <input type="button"  style="margin-top: 5px;" class="btn btn-outline-secondary" onclick="location.href='index.jsp'"  value="돌아가기">
         </div>
 </body>
 </html>

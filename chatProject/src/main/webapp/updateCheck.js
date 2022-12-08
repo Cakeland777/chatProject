@@ -1,4 +1,3 @@
-
 function check() {
     if (document.userForm.uid.value == "") {
 		Swal.fire('아이디를 입력해주세요','','warning')
@@ -74,15 +73,8 @@ function check() {
         return false;
     }  
      else {
-	Swal.fire({
-  position: 'center',
-  icon: 'success',
-  title: '가입완료',
-  showConfirmButton: false,
-  timer: 1500
-})
-  setTimeout(2000);
-  return true;
+	
+        return true;
     }
  
 }

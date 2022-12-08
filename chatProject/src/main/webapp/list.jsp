@@ -36,6 +36,7 @@
 			<td>${member.name}</td>
 			<td>${member.email}</td>
 			<td>${member.address}</td>
+			<td><button>삭제</button></td>
 		</tr>
 <% }%>
 	</tbody>
