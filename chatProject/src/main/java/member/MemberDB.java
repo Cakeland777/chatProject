@@ -150,6 +150,7 @@ private MemberDB(){}
 					   loginMember.setPwd(rs.getString("pwd"));
 					   loginMember.setEmail(rs.getString("email"));
 					   loginMember.setAddress(rs.getString("address"));
+					   loginMember.setPhone(rs.getString("phone"));
 					   loginMember.setSex(rs.getString("sex"));
 					   loginMember.setAdmin(rs.getString("admin"));
 					   loginMember.setLogin_check(rs.getString("login_check"));

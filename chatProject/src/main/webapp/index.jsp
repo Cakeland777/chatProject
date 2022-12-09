@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="member.*"
+    %>
+
 <%
 String id = (String)session.getAttribute("userid");
 String name = (String)session.getAttribute("name");
-String admin= (String)session.getAttribute("admin");
-String pwd= (String)session.getAttribute("pwd");
-String phone= (String)session.getAttribute("phone");
-String address= (String)session.getAttribute("address");
-String email= (String)session.getAttribute("email");
+// String admin= (String)session.getAttribute("admin");
+// String pwd= (String)session.getAttribute("pwd");
+// String phone= (String)session.getAttribute("phone");
+// String address= (String)session.getAttribute("address");
+// String email= (String)session.getAttribute("email");
+Member member=(Member)request.getAttribute("member");
 session.setAttribute("userid", id);
 %>
 <!DOCTYPE html>
@@ -19,17 +23,25 @@ session.setAttribute("userid", id);
 
 <style>
 
+
    .header{
    background-color: lightblue;
    color:white;
+   text-align: center;
    }
 
-body i:first-child{
-    font-size: 30px;
-    line-height: 30px;
-    color:grey;
-}
+.wrap{
 
+ width:300px;
+    height:300px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-150px;
+    margin-top:-150px;
+    text-align: center;
+
+}
 
 </style>
 <title>메인</title>
@@ -64,41 +76,44 @@ function btn(){
 		})
 }
 </script>
-<h1 class="header"><a href="/chatProject/index.jsp"><i class="bi bi-house-fill" color="white" ></a></i></h1>
+<c:if test="${member eq null}">
 <%if(id==null){%>
+<h1 class="header">&nbsp;</h1>
+<div class="wrap">
+<div class="card" style="width: 18rem; " >
 
-<div class="card" style="width: 18rem;">
   <div class="card-body">
-<i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
+<i class="bi bi-door-open-fill" width="20" height="20" ></i>
     <a href="loginForm.jsp" class="btn btn-outline-info stretched-link">로그인</a>
   </div>
-</div>
-<div class="card" style="width: 18rem;">
+</div><div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-pencil-square"color="mediumturquoise"  width="20" height="20" ></i>
     <a href="user.jsp" class="btn btn-outline-info stretched-link">회원가입</a>
   </div>
-</div>
-<div class="card" style="width: 18rem;">
+</div><div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-question-circle-fill" color="mediumturquoise"  width="20" height="20"></i>
     <a href="FindId.jsp" class="btn btn-outline-info stretched-link">아이디찾기</a>
   </div>
-</div>
-<div class="card" style="width: 18rem;">
+</div><div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-question-circle-fill" color="mediumturquoise"  width="20" height="20"></i>
     <a href="FindPwd.jsp" class="btn btn-outline-info stretched-link">비밀번호찾기</a>
   </div>
 </div>
+</div>
+
+
 
 </body>
 </html>
 
 <%}
 else if(admin.equals("1")){%>
-<h2 class="header"><%= name%>님 안녕하세요</h2>
-<div class="card" style="width: 18rem;">
+<h2 class="header">관리자 페이지</h2>
+<div class="wrap">
+<div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
     <a href="member.jsp" class="btn btn-outline-info stretched-link">가입회원 확인</a>
@@ -116,28 +131,21 @@ else if(admin.equals("1")){%>
     <a href="logout" class="btn btn-outline-info stretched-link">로그아웃</a>
   </div>
 </div>
+</div>
+
 </body>
 </html>
 <%} 
 else{%>
 	<h2 class="header"><%= name%>님 안녕하세요</h2>
+	<div class="wrap">
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
     <a href="logout" class="btn btn-outline-info stretched-link">로그아웃</a>
   </div>
 </div>
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-<i class="bi bi-pencil-square"color="mediumturquoise"  width="20" height="20" ></i>
-    <a href="memberUpdate.jsp" class="btn btn-outline-info stretched-link">회원정보수정</a>
-  </div>
-</div>
-<!-- <div class="card" style="width: 18rem;"> -->
-<!--   <div class="card-body"> -->
-<!--     <a href="BoardForm.jsp" class="btn btn-outline-info stretched-link">게시글 작성</a> -->
-<!--   </div> -->
-<!-- </div> -->
+
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-card-text"color="mediumturquoise"  width="20" height="20"></i>
@@ -156,11 +164,6 @@ else{%>
     <a href="detailMember" class="btn btn-outline-info stretched-link">마이페이지</a>
   </div>
 </div>
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-<i class="bi bi-eraser-fill" color="mediumturquoise"  width="20" height="20"></i>
-    <a class="btn btn-outline-info stretched-link" onclick="return btn()">회원탈퇴</a>
-  </div>
 </div>
 	
 </body>

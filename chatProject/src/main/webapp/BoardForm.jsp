@@ -51,42 +51,34 @@
     <link rel="stylesheet" href="css/register.css">
   </head>
   <body> 
-  <jsp:include page="index.jsp"/>
+   <jsp:include page="navBar.jsp"/>
     <div id="container">
       <h1 class="header">게시글 등록</h1>
       <form action ="InsertBoard" method="post" name="boardForm">
         <fieldset>
- 
-     <div class="form-floating">
-      <input type="text" class="form-control" id="uid" name="uid"  value="${userid}" readonly="readonly">
-      <label for="floatingInput">작성자 아이디</label>
-    </div>
-         <div class="form-floating">
-      <input type="text" class="form-control" id="name" name="name"  value="${name}" readonly="readonly">
-      <label for="floatingInput">작성자 이름</label>
-    </div>
+    
   <select class="form-select" id="type" name="type" aria-label="Default select example" required>
   <option selected>게시글 유형을 선택해주세요</option>
   <option value="공지사항">공지사항</option>
   <option value="일반">일반</option>
   <option value="Q&A">Q&A</option>
 </select>
-        
+         <div class="form-floating">
+      <input type="hidden" class="form-control" id="uid" name="uid"  value="${userid}" readonly="readonly">
+      <label for="floatingInput"></label>
+    </div>
+         <div class="form-floating">
+      <input type="hidden" class="form-control" id="name" name="name"  value="${name}" readonly="readonly">
+      <label for="floatingInput"></label>
+    </div>
      <div class="form-floating">
       <input type="text" class="form-control" id="title"name="title" required>
       <label for="floatingInput">제목</label>
     </div>
-<!--    <div class="form-floating"> -->
-<!--       <input type="text" class="form-control" id="content"name="content" placeholder="phone"> -->
-<!--       <label for="floatingInput">내용</label> -->
-<!--     </div> -->
-<!--     <div class="mb-4"> -->
 
-<!--   <textarea class="form-control"id="content"name="content"  rows="3"placeholder="내용"></textarea> -->
-<!-- </div> -->
 <div class="textcontainer">
-  <textarea class="summernote" name="content"></textarea>    
-<!-- 	<textarea name="content" id="editor"></textarea> -->
+<!--   <textarea class="summernote" name="content"></textarea>     -->
+	<textarea name="content" id="editor"></textarea>
 </div>
 <script>
 $('.summernote').summernote({

@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="css/register.css">
   </head>
   <body> 
-  <jsp:include page="index.jsp"/>
+  <jsp:include page="navBar.jsp"/>
     <div id="container">
       <h1 class="header">회원정보수정</h1>
       <form action ="updateMember" method="post" name="userForm">
@@ -61,7 +61,7 @@
       <label for="floatingInput">이름</label>
     </div>
    <div class="form-floating">
-      <input type="text"value="${phone}"  class="form-control" id="phone"name="phone" placeholder="phone">
+      <input type="text" value="${phone}"  class="form-control" id="phone"name="phone" placeholder="phone">
       <label for="floatingInput">휴대폰</label>
     </div>
    <div class="form-floating">
@@ -87,7 +87,7 @@
         </fieldset>
         <div id="buttons">
           <input type="submit" class="btn btn-secondary" value="수정하기"onclick="return check()">
-          <input type="reset" class="btn btn-secondary" onclick="location.href='index.jsp'"  value="취소">
+          <input type="reset" class="btn btn-secondary" onclick="location.href='detailMember'"  value="취소">
 
         </div>
       </form>

@@ -20,7 +20,7 @@ color:white;}
 </head>
 <body>
 
-<h1>   &nbsp;</h1>
+  <jsp:include page="navBar.jsp"/>
 <hr>
  
 

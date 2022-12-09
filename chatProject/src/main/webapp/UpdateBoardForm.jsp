@@ -74,7 +74,7 @@ String BoardContent=request.getParameter("content");
       <label for="floatingInput">아이디</label>
     </div>
 <div class="container">
-  <textarea class="summernote" name="content" ></textarea>    
+  <textarea class="summernote" name="content" ><%=BoardContent%></textarea>    
 </div>
 <script>
 $('.summernote').summernote({

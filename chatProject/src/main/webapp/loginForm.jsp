@@ -81,16 +81,7 @@ else if (${status eq 'success' }) {
 		  timer: 1500
 		})
 }
-else if (${status eq 'fail' }) {
-	Swal.fire({
-		  position: 'center',
-		  icon:'error',
-		  title: '이미 등록된 아이디입니다',
-		  text: '다른 아이디를 사용해주세요',
-		  showConfirmButton: false,
-		  timer: 1500
-		})
-}
+
 </script>
 </main>
 

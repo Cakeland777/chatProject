@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="css/register.css">
   </head>
   <body> 
-  <jsp:include page="index.jsp"/>
+  <jsp:include page="navBar.jsp"/>
   <script>
   
   if (${status eq 'fail'}) {

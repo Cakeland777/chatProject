@@ -38,7 +38,35 @@
     <link rel="stylesheet" href="css/register.css">
   </head>
   <body> 
-  <jsp:include page="index.jsp"/>
+ <jsp:include page="navBar.jsp"/>
+ <script>
+
+function btn(){
+	Swal.fire({
+		  title: '정말 탈퇴하시겠습니까??',
+		  text: "",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: 'skyblue',
+		  cancelButtonColor: 'lightcoral',
+		  confirmButtonText: '네',
+		cancelButtonText:'아니오',
+			allowOutsideClick:false
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire({
+		    	  position: 'center',
+		    	  icon: 'success',
+		    	  title: '탈퇴완료',
+		    	  showConfirmButton: false,
+		    	  timer: 1500
+		    	})
+		    setTimeout("location.href='DeleteMember'",2000);
+		    return true
+		  }
+		})
+}
+</script>
     <div id="container">
       <h1 class="header">회원정보</h1>
      <div class="form-floating">
@@ -69,6 +97,9 @@
       <input type="text" value="${member.sex}" class="form-control" id="sex"name="sex" placeholder="address" readonly="readonly">
       <label for="floatingInput">성별</label>
     </div>
+ 
+     			<input type="button" class="btn btn-secondary" onclick="location.href='memberUpdate.jsp'"  value="정보 수정">
+     			<input type="button" class="btn btn-secondary" onclick="return btn()"  value="탈퇴">
               <input type="reset" class="btn btn-secondary" onclick="location.href='index.jsp'"  value="돌아가기">
    </div>       
   </body>

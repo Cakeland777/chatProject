@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="css/register.css">
   </head>
   <body> 
-  <jsp:include page="index.jsp"/>
+    <jsp:include page="navBar.jsp"/>
     <div id="container">
       <h1 class="header">아이디 찾기</h1>
       <form action ="IdFind" method="post" name="IdForm">
