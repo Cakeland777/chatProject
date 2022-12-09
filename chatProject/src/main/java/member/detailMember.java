@@ -31,7 +31,7 @@ public class detailMember extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String userid = (String)session.getAttribute("userid");
-		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+		MemberDB db=MemberDB.getInstance();
 		Member member=db.getMember(userid);
 		request.setAttribute("member", member);
 		RequestDispatcher dispatcher=request.getRequestDispatcher("/memberDetail.jsp");

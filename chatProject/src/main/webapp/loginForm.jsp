@@ -6,11 +6,12 @@
     <meta charset="utf-8">
   
     <title>Login</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -26,13 +27,12 @@
         }
       }
     </style>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
        <script type="text/javascript" src="loginCheck.js"></script>
-    <!-- Custom styles for this template -->
    <link href="css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    
+
 <main class="form-signin" >
   <form action="loginMember" method="post" >
 <!--     <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
@@ -52,6 +52,46 @@
         </div>
    
   </form>
+      <script>
+if (${status eq 'check'}) {
+	Swal.fire({
+		  position: 'center',
+		  icon:'error',
+		  title: '등록되지 않은 회원입니다',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+}
+else if (${status eq 'notuse' }) {
+	Swal.fire({
+		  position: 'center',
+		  icon:'question',
+		  title: '미사용 회원입니다',
+		  text: '관리자에게 문의하세요',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+}
+else if (${status eq 'success' }) {
+	Swal.fire({
+		  position: 'center',
+		  icon:'success',
+		  title: '가입완료',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+}
+else if (${status eq 'fail' }) {
+	Swal.fire({
+		  position: 'center',
+		  icon:'error',
+		  title: '이미 등록된 아이디입니다',
+		  text: '다른 아이디를 사용해주세요',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+}
+</script>
 </main>
 
 

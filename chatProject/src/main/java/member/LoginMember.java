@@ -1,5 +1,6 @@
 package member;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,10 +30,10 @@ public class LoginMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
+		 response.setContentType("text/html; charset=UTF-8");
 	      String userid=request.getParameter("uid");
 	      String pwd=request.getParameter("pwd");
-	      MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+	      MemberDB db=MemberDB.getInstance();
 	      Member member=new Member();
 	      member.setUid(userid);
 	      member.setPwd(pwd);
@@ -42,23 +43,28 @@ public class LoginMember extends HttpServlet {
 	    	  session.setAttribute("userid", result.getUid());
 	    	  session.setAttribute("name",result.getName());
 	    	  session.setAttribute("admin",result.getAdmin());
-	    	  response.sendRedirect("index.jsp");	  
+	    	  session.setAttribute("pwd",result.getPwd());
+	    	  session.setAttribute("phone",result.getPhone());
+	    	  session.setAttribute("address",result.getAddress());
+	    	  session.setAttribute("email",result.getEmail());
+	    	  response.sendRedirect("index.jsp");
+
+
 	      }
 	      
 
 	      else if(result!=null&&result.getLogin_check()!=null&&result.getLogin_check().equals("F")) {
-	    	  response.setContentType("text/html; charset=UTF-8");
-	    	  PrintWriter writer = response.getWriter();
-	    	  writer.println("<script>alert('미사용 회원입니다. 관리자에게 문의해주세요'); location.href='"+"loginForm.jsp"+"';</script>"); 
-	    	  writer.close();
+		  	  request.setAttribute("status", "notuse");
+			  RequestDispatcher dispatcher=request.getRequestDispatcher("loginForm.jsp");
+	    	  dispatcher.forward(request, response);
+
 
 	      }
 	      else {
-	    	  response.setContentType("text/html; charset=UTF-8");
-	    	  PrintWriter writer = response.getWriter();
-	    	  writer.println("<script>alert('아이디 혹은 비밀번호를 확인해주세요'); location.href='"+"loginForm.jsp"+"';</script>"); 
-	    	  writer.close();
-	    	  
+	    	  request.setAttribute("status", "check");
+	    	  RequestDispatcher dispatcher=request.getRequestDispatcher("loginForm.jsp");
+	    	  dispatcher.forward(request, response);
+
 	      }
 	  }
 

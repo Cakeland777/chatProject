@@ -41,6 +41,53 @@ a {
 <title>게시판</title>
 </head>
 <body>
+<%
+//1. 디비에서 전체 글목록을 읽어서 가져오기
+//2. BoardDAO 객체생성
+BoardDB db=BoardDB.getInstance();
+//3. 디비에 글이 있는지 확인 후 있으면 글 모두 가져오기,없으면 가져오지않기 : getBoardCount()
+int cnt = db.getCount();
+
+//7. 페이징처리 (이미 유명한 알고리즘 공식, 사용법만 알면 됨)
+//7-1. 한 페이지에서 보여줄 글의 개수 설정(5개, 변경가능)
+int pageSize = 5; 
+//7-2. 지금 내가 몇페이지에 있는 확인
+//페이지번호는 숫자인데 왜 String으로 하는지 ? => 연산을 할 것이 아니라서 String이 편함
+String pageNum = request.getParameter("pageNum");
+//7-3. 페이지번호정보가 없을 경우 내가 보는 페이지가 첫페이지가 되도록
+if(pageNum == null){ 
+	pageNum ="1";
+}
+//7-4. 시작행번호계산
+//10개씩 컬럼 나누고 2페이지에서 시작행이 11이되고 3페이지에서 시작행이 21이 되게끔 만들기
+int currentPage = Integer.parseInt(pageNum); //String을 integer로 변환
+int startRow = (currentPage-1)*pageSize + 1;
+//currentPage가 2인경우, (2-1)x10+1 = 11
+//currentPage가 3인경우, (3-1)x10+1 = 21
+
+//7-5. 끈행번호계산
+int endRow= currentPage * pageSize;
+//currentPage가 2인경우, 2*10 = 20
+//currentPage가 3인경우, 3*10 = 30
+
+
+//4. 게시판 글의 수를 화면에 데이터 출력
+//게시판 총 글의 수 : cnt개
+//5. getBoardList() 메서드생성
+System.out.println(bdao.getBoardList());
+
+ArrayList boardList = null;
+
+if(cnt != 0){
+	//일반적인 리스트호출방법,  아래는 페이징처리한 리스트호출방법
+	//boardList = bdao.getBoardList();
+	//7-6. 페이징 처리한 리스트 호출 => getBoardList()메서드만들기(메서드 오버로딩)
+	boardList = bdao.getBoardList(startRow, pageSize);
+} 
+
+//6. 게시판 모든 내용을  화면에 출력
+
+%>
 <h1 class="header"><a href="/chatProject/index.jsp"><i class="bi bi-house-fill" ></i></a> 게시판</h1>
 
 <%

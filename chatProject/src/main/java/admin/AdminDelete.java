@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import member.MemberRepositoryDB;
+import member.MemberDB;
 
 import java.io.IOException;
 
@@ -32,7 +32,7 @@ public class AdminDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+		MemberDB db=MemberDB.getInstance();
 		String id = request.getParameter("id");
 		db.delete(id);
 		response.sendRedirect("member.jsp");

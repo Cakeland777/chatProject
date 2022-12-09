@@ -40,11 +40,11 @@ text-align: center;
 <body>
 <h2>가입회원정보</h2>
 <%
-   request.setCharacterEncoding( "utf-8" );
+request.setCharacterEncoding( "utf-8" );
    String _name = request.getParameter("name");
    Member member=new Member();
    member.setName(_name);
-   MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+   MemberDB db=MemberDB.getInstance();
    List membersList=db.listMembers(member);
 %>
 <div class="search">

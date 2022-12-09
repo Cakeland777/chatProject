@@ -1,5 +1,6 @@
 package member;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,15 +31,16 @@ public class PwdFind extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      String userid=request.getParameter("uid");
 	      String phone=request.getParameter("phone");
-	      MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+	      MemberDB db=MemberDB.getInstance();
 	      Member member=new Member();
 	      member.setUid(userid);
 	      member.setPhone(phone);
 	      Member result= db.findPwd(member);
-	      HttpSession session=request.getSession();
 	      if(result!=null&&result.getName()!=null) {
-	    	  session.setAttribute("pwd", result.getPwd());
-	    	  response.sendRedirect("PwdResult.jsp");	  
+	    	  request.setAttribute("pwd", result.getPwd());
+		  		RequestDispatcher dispatcher=request.getRequestDispatcher("/PwdResult.jsp");
+		  		dispatcher.forward(request, response);
+	    	 
 	      }
 	      else {
 	    	  response.sendRedirect("FindPwd.jsp");

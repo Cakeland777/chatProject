@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String id = (String)session.getAttribute("userid");
-	String name = (String)session.getAttribute("name");
-	
-	String admin = (String)session.getAttribute("admin");
-	session.setAttribute("userid", id);
+String id = (String)session.getAttribute("userid");
+String name = (String)session.getAttribute("name");
+String admin= (String)session.getAttribute("admin");
+String pwd= (String)session.getAttribute("pwd");
+String phone= (String)session.getAttribute("phone");
+String address= (String)session.getAttribute("address");
+String email= (String)session.getAttribute("email");
+session.setAttribute("userid", id);
 %>
 <!DOCTYPE html>
 <html>
@@ -34,6 +37,7 @@ body i:first-child{
 </head>
 <body>
 <script>
+
 function btn(){
 	Swal.fire({
 		  title: '정말 탈퇴하시겠습니까??',
@@ -93,7 +97,7 @@ function btn(){
 
 <%}
 else if(admin.equals("1")){%>
-<h2 class="header"><%=name %>님 안녕하세요</h2>
+<h2 class="header"><%= name%>님 안녕하세요</h2>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
@@ -116,7 +120,7 @@ else if(admin.equals("1")){%>
 </html>
 <%} 
 else{%>
-	<h2 class="header"><%=name %>님 안녕하세요</h2>
+	<h2 class="header"><%= name%>님 안녕하세요</h2>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>

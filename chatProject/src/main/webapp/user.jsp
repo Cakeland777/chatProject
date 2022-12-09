@@ -43,6 +43,19 @@
   </head>
   <body> 
   <jsp:include page="index.jsp"/>
+  <script>
+  
+  if (${status eq 'fail'}) {
+		Swal.fire({
+			  position: 'center',
+			  icon:'error',
+			  title: '이미 존재하는 아이디입니다',
+			  showConfirmButton: false,
+			  timer: 1500
+			})
+	}
+  
+  </script>
   <article>
     <div id="container">
       <h1 class="header">회원 가입</h1>

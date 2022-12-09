@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String id= (String)session.getAttribute("id");
-// 	session.setAttribute("userid", id);
-%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -46,7 +42,7 @@
       <h1 class="header">아이디 찾기</h1>
       <form action ="#" method="post" name="PwdForm">
         <fieldset>
-<h5>아이디: <%=id%></h5>
+<h5>아이디:${id}</h5>
 
         </fieldset>
         <div id="buttons">

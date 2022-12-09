@@ -26,12 +26,12 @@ import javax.sql.DataSource;
 
 
 
-public class MemberRepositoryDB {
-private MemberRepositoryDB(){}
+public class MemberDB {
+private MemberDB(){}
 	
 	
-	private static MemberRepositoryDB instance=new MemberRepositoryDB();
-	public static MemberRepositoryDB getInstance() {
+	private static MemberDB instance=new MemberDB();
+	public static MemberDB getInstance() {
 		
 		return instance;
 	}

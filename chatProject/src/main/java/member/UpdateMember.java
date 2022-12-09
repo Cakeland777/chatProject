@@ -30,7 +30,7 @@ public class UpdateMember extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userid=request.getParameter("userid");
-		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+		MemberDB db=MemberDB.getInstance();
 		Member member=db.getMember(userid);
 		request.setAttribute("member", member);
 		RequestDispatcher dispatcher=request.getRequestDispatcher("memberUpdate.jsp");
@@ -59,7 +59,7 @@ public class UpdateMember extends HttpServlet {
 		member.setEmail(email);
 		member.setAddress(address);
 		member.setSex(sex);
-		MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+		MemberDB db=MemberDB.getInstance();
 		db.updateMember(member);
 		HttpSession session=request.getSession();
 		session.setAttribute("name",member.getName());

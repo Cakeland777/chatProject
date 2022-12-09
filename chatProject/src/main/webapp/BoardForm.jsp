@@ -37,8 +37,16 @@
   padding: 5px;
    
    }
-    </style>
+   .ck.ck-editor {
+   	max-width: 1000px;
+}
+.ck-editor__editable {
+    min-height: 300px;
+}
    
+    </style>
+   <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/translations/ko.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="css/register.css">
   </head>
@@ -78,6 +86,7 @@
 <!-- </div> -->
 <div class="textcontainer">
   <textarea class="summernote" name="content"></textarea>    
+<!-- 	<textarea name="content" id="editor"></textarea> -->
 </div>
 <script>
 $('.summernote').summernote({
@@ -100,6 +109,11 @@ $('.summernote').summernote({
 			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 	});
+ClassicEditor
+.create( document.querySelector( '#editor' ), {language : "ko"} )
+.catch( error => {
+    console.error( error );
+} );
 </script>
         </fieldset>
         <div id="buttons">

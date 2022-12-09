@@ -30,7 +30,7 @@ public class registerMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  
+		  response.setContentType("text/html; charset=UTF-8");
 	      String userid=request.getParameter("uid");
 	      String pwd=request.getParameter("pwd1");
 	      String address=request.getParameter("address");
@@ -47,23 +47,20 @@ public class registerMember extends HttpServlet {
 	      member.setEmail(email);
 	      member.setPhone(phone);
 	      member.setSex(sex);
-	      MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+	      MemberDB db=MemberDB.getInstance();
 	      int result=db.insertMember(member);
 	      HttpSession session=request.getSession();
 	      if (result==1) {
-	    	  session.setAttribute("userid", userid);
-	    	  response.setContentType("text/html; charset=UTF-8");
-	    	  PrintWriter writer = response.getWriter();
-	    	  writer.println("<script>alert('가입성공');location.href='"+"loginForm.jsp"+"';</script>");  
+	    	  request.setAttribute("status", "success");
+			  RequestDispatcher dispatcher=request.getRequestDispatcher("loginForm.jsp");
+	    	  dispatcher.forward(request, response);
 
-	    	  writer.close();
 	    	  
 	      }
 	      else {
-	    	  response.setContentType("text/html; charset=UTF-8");
-	    	  PrintWriter writer = response.getWriter();
-	    	  writer.println("<script>alert('가입실패'); location.href='"+"loginForm.jsp"+"';</script>"); 
-	    	  writer.close();
+	    	  request.setAttribute("status", "fail");
+			  RequestDispatcher dispatcher=request.getRequestDispatcher("user.jsp");
+	    	  dispatcher.forward(request, response);
 	      }
 
 

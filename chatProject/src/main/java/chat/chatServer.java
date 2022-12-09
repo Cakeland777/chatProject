@@ -18,13 +18,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import member.Member;
-import member.MemberRepositoryDB;
+import member.MemberDB;
 
 public class chatServer {
 	ServerSocket serverSocket;
 	ExecutorService threadPool;
 	Map<String, Map<String, SocketClient>> chatRooms;
-	MemberRepositoryDB memberRepository;
+	MemberDB memberRepository;
 
 	public chatServer() {
 	    threadPool = Executors.newFixedThreadPool(100);

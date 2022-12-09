@@ -1,5 +1,6 @@
 package member;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,15 +31,15 @@ public class IdFind extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      String name=request.getParameter("name");
 	      String phone=request.getParameter("phone");
-	      MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+	      MemberDB db=MemberDB.getInstance();
 	      Member member=new Member();
 	      member.setName(name);
 	      member.setPhone(phone);
 	      Member result= db.findId(member);
-	      HttpSession session=request.getSession();
 	      if(result!=null&&result.getName()!=null) {
-	    	  session.setAttribute("id", result.getUid());
-	    	  response.sendRedirect("IdResult.jsp");	  
+	    	  request.setAttribute("id", result.getUid());
+	  		RequestDispatcher dispatcher=request.getRequestDispatcher("/IdResult.jsp");
+	  		dispatcher.forward(request, response);
 	      }
 	      else {
 	    	  response.sendRedirect("FindId.jsp");

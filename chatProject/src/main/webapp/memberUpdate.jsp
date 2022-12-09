@@ -57,23 +57,20 @@
       <label for="floatingInput">비밀번호확인</label>
     </div>
      <div class="form-floating">
-      <input type="text" class="form-control" id="name"name="name" placeholder="name">
+      <input type="text"  value="${name}" class="form-control" id="name"name="name" placeholder="name">
       <label for="floatingInput">이름</label>
     </div>
    <div class="form-floating">
-      <input type="text" class="form-control" id="phone"name="phone" placeholder="phone">
+      <input type="text"value="${phone}"  class="form-control" id="phone"name="phone" placeholder="phone">
       <label for="floatingInput">휴대폰</label>
     </div>
    <div class="form-floating">
-      <input type="email" class="form-control" id="email"name="email" placeholder="email">
+      <input type="email" value="${name}" class="form-control" id="email"name="email" placeholder="email">
       <label for="floatingInput">이메일</label>
     </div>
-<!--   <div class="mb-3"> -->
-<!--     <label for="exampleInputPassword1" class="form-label">주소</label> -->
-<!--     <input type="text" class="form-control" id="address" name="address"> -->
-<!--   </div> -->
+
    <div class="form-floating">
-      <input type="text" class="form-control" id="address"name="address" placeholder="address">
+      <input type="text" value="${address}" class="form-control" id="address"name="address" placeholder="address">
       <label for="floatingInput">주소</label>
     </div>
 <div class="mb-3">

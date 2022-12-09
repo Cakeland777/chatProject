@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import member.MemberRepositoryDB;
+import member.MemberDB;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class AdminUse extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	MemberRepositoryDB db=MemberRepositoryDB.getInstance();
+    	MemberDB db=MemberDB.getInstance();
 		String id = request.getParameter("id");
 		db.ChangeStatus(id);
 		response.sendRedirect("member.jsp");

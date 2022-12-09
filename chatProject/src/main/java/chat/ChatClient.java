@@ -21,10 +21,10 @@ import org.json.JSONObject;
 import member.Member;
 
 import member.Member.NotExistUidPwd;
-import member.MemberRepositoryDB;
+import member.MemberDB;
 
 public class ChatClient {
-	MemberRepositoryDB memberRepository=MemberRepositoryDB.getInstance();
+	MemberDB memberRepository=MemberDB.getInstance();
 	//필드
 	Socket socket;
 	DataInputStream dis;

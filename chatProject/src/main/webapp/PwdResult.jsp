@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String pwd = (String)session.getAttribute("pwd");
-// 	session.setAttribute("userid", id);
-%>
-
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -46,7 +41,7 @@
       <h1 class="header">비밀번호 찾기</h1>
       <form action ="#" method="post" name="PwdForm">
         <fieldset>
-<h5>비밀번호: <%=pwd %></h5>
+<h5>비밀번호: ${pwd}</h5>
 
         </fieldset>
         <div id="buttons">

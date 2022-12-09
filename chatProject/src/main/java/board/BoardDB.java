@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 import member.Member;
-import member.MemberRepositoryDB;
+import member.MemberDB;
 
 public class BoardDB {
 private BoardDB(){}
@@ -90,7 +90,35 @@ private BoardDB(){}
 		      }
 		      return list;
 		   } 
-	   
+	   public ArrayList getBoardList(){
+			ArrayList boardList = new ArrayList(); 
+
+			try {
+				open();
+
+				String sql = "select * from board order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
+				pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();
+
+				while(rs.next()){
+					Board bb = new Board();
+					bb.setId(rs.getString("id"));
+					bb.setTitle(rs.getString("title"));
+					bb.setUserid(rs.getString("userid"));
+					bb.setContent(rs.getString("content"));
+					bb.setTime(rs.getString("time"));
+					bb.setName(rs.getString("name"));
+					bb.setType(rs.getString("type"));
+					bb.setCount(rs.getInt("count"));
+					boardList.add(bb); 
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return boardList;
+		}
 	   public int insertBoard(Board board) {
 		   int result=-1;
 		
@@ -210,6 +238,29 @@ private BoardDB(){}
 			      }
 			   
 			   }
+		   public int getCount(){
+
+				int count = 0;
+
+				try {
+					//디비연결
+					open();
+					String sql = "select count(*) from board";
+					pstmt = conn.prepareStatement(sql);
+					//실행 -> rs저장
+					ResultSet rs = pstmt.executeQuery();
+					//데이터처리
+					if(rs.next()){
+						count = rs.getInt(1); // 데이터가 없으면 null이고 return 0값이 된다.
+
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					close();
+				}
+				return count;
+			}
 		   public int updateBoard(Board board) {
 			   int result=-1;
 			   String sql="update board set name=?,title=?,content=?,type=? where id=?";
