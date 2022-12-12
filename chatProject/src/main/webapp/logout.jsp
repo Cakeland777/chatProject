@@ -1,5 +1,4 @@
-<!-- Written by Sukhwinder Singh (ssruprai@hotmail.com -->
-<%-- Written by Sukhwinder Singh (ssruprai@hotmail.com --%>
+
 
 <%@ page import="chat.*" errorPage="error.jsp" %>
 <HTML>
@@ -7,7 +6,7 @@
 <TITLE>You have logged out</TITLE>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/chat.css">
 <META http-equiv="pragma" content="no-cache">
-<meta name="Author" content="Sukhwinder Singh (ssruprai@hotmail.com">	
+
 </HEAD>
 
 <BODY>

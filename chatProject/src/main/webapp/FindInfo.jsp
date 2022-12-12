@@ -41,10 +41,13 @@
 <a href="#" onclick="ocultar_login_sign_up()" >X</a>
 
    <h2>아이디 찾기</h2>
+   <br/>
     <form action ="IdFind" method="post" name="IdForm">
  <input type="text"  id= "name" name="name" placeholder="이름" />
  <br/>
+ <br/>
 <input type="text" id="phone" name="phone" placeholder="전화번호" />
+<br/>
 <br/>
 <button type="submit"  class="btn_login" >검색</button>
 </form>
@@ -53,10 +56,13 @@
    <div class="cont_form_sign_up">
 <a href="#" onclick="ocultar_login_sign_up()">X</a>
      <h2>비밀번호 찾기</h2>
+     <br/>
       <form action ="PwdFind" method="post" name="PwdForm">
  <input type="text"  id= "uid" name="uid" placeholder="아이디" />
  <br/>
+ <br/>
 <input type="text" id="phone" name="phone" placeholder="전화번호" />
+<br/>
 <br/>
 <button type="submit" class="btn_sign_up" >검색</button>
 </form>

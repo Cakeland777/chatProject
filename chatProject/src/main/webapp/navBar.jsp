@@ -23,7 +23,7 @@ nav {
 /*   justify-content: center; */
   position: relative;
   background-color:#ADD8E6 ;
-  
+  z-index: 100;
 }
 
 ul, li {
@@ -49,7 +49,7 @@ ul, li {
   padding: 14px 36px;
   border-right: 1px solid rgba(0,0,0,0.15);
   text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
-  z-index:-1;
+ 
    
   
 }

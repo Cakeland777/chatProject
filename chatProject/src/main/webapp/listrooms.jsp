@@ -78,7 +78,7 @@ else
 %>
 <jsp:include page="navBar.jsp"/>
 
-<TABLE width="80%" align="center">	
+<TABLE style="table-layout:fixed" width="80%" align="center">	
 	<!--<tr>
 		<td class="normal">Welcome <span class="chattername"><%=nickname%></span></td>
 	</tr>	

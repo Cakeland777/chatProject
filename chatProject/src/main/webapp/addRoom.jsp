@@ -37,24 +37,8 @@ color: lightblue;
 	<%
 	}
 	%>
-<!-- 	<form action="manageChat" method="post"> -->
-<!-- 	<tr> -->
-<!-- 		<td colspan="2"><h2>채팅방 생성</h2></td> -->
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td><b>방 이름(공백 없이)</b></td><td><input type="text" name="rn"></td> -->
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td><b>설명</b></td><td><textarea rows="5" cols="30" name="rd"></textarea></td> -->
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td>&nbsp;</td><td><input type="submit" value="생성"></td> -->
-<!-- 	</tr> -->
-<!-- </table> -->
-<!-- </form> -->
 
 
- 
        <form  action="manageChat" method="post" >
            
                 <span><i class="icon icon-bubble"></i></span>

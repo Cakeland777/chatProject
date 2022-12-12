@@ -77,7 +77,7 @@ String BoardContent=request.getParameter("content");
       <label for="floatingInput">아이디</label>
     </div>
 <div class="container">
-  <textarea class="summernote" name="content" ><%=BoardContent%></textarea>    
+  <textarea class="summernote" name="content" ></textarea>    
 </div>
 <script>
 $('.summernote').summernote({
@@ -109,6 +109,8 @@ $('.summernote').summernote({
 
         </div>
       </form>
-    </div>           
+    </div>  
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>                
   </body>
 </html>

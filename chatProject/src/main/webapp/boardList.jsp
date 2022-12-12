@@ -59,7 +59,7 @@ a {
 
 
 .w-btn:active {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 <link rel="stylesheet" href="htps://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -139,6 +139,27 @@ a {
    }
 %>	
 </table>
-
+<script>
+if (${message eq 'insert'}) {
+	Swal.fire({
+		  position: 'center',
+		  icon:'success',
+		  title: '게시글 등록 완료',
+		  text: '',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+}
+else if (${message eq 'noinsert'}) {
+	Swal.fire({
+		  position: 'center',
+		  icon:'error',
+		  title: '게시글 등록 실패',
+		  text: '',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+}
+</script>
 </body>
 </html>

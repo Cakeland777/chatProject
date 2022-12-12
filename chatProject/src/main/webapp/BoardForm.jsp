@@ -52,7 +52,7 @@
     </style>
    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/translations/ko.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>    
     <link rel="stylesheet" href="css/register.css">
      <link rel="stylesheet" href="css/button.css">
   </head>
@@ -115,11 +115,15 @@ ClassicEditor
 </script>
         </fieldset>
      <div class="button_container" >
-          <input type="submit" class="btn" value="등록하기"onclick="location.href='boardList.jsp'">
+          <input type="submit" class="btn" value="등록하기">
           <input type="reset" class="btn" onclick="location.href='boardList.jsp'"  value="취소">
 
         </div>
       </form>
-    </div>           
+    </div> 
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>  
+         
   </body>
 </html>

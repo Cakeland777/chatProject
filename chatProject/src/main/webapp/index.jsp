@@ -15,7 +15,7 @@
 
 
    .header{
-   background-color: lightblue;
+  margin-top:50px;
    color:white;
    text-align: center;
    }
@@ -39,6 +39,12 @@ body {
     margin-top:-150px;
     text-align: center;
 
+}
+.bi{
+color:SlateBlue ;
+margin-right: 5px;
+font-size: 20px;
+font-weight: bold;
 }
 
 </style>
@@ -83,7 +89,7 @@ body {
 <div class="wrap">
 <div class="card" style="width: 18rem; " >
   <div class="card-body">
-<i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
+<i class="bi bi-info-square"color="mediumturquoise"  width="20" height="20" ></i>
     <a href="member.jsp" class="btn btn-outline-info stretched-link">가입회원 확인</a>
   </div>
 </div>
@@ -122,7 +128,7 @@ body {
 </div>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-<i class="bi bi-card-text"color="mediumturquoise"  width="20" height="20"></i>
+<i class="bi bi-chat-dots"color="mediumturquoise"  width="20" height="20"></i>
     <a href="listrooms.jsp" class="btn btn-outline-info stretched-link">채팅</a>
   </div>
 </div>
