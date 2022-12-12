@@ -138,7 +138,7 @@ color: lightblue;
                 대화명  <input type="text" class="form-control item" id="nickname" value ="${user.name}" name="nickname" placeholder="대화명"  >
             </div>
             <div class="form-group">
-                아이디  <input type="text" class="form-control item" value ="${user.uid}" name="id" readonly  >
+                아이디  <input type="text" class="form-control item" value ="${userid}" name="id" readonly  >
             </div>
   
 <div class="button_container" >

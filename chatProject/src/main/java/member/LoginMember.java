@@ -40,6 +40,7 @@ public class LoginMember extends HttpServlet {
 	      Member result= db.login(member);
 	      HttpSession session=request.getSession();
 	      if(result!=null&&result.getName()!=null&&result.getLogin_check().equals("T")) {
+	    	  session.setAttribute("userid", result.getUid());
 	    	  session.setAttribute("user", result);
 	    	  response.sendRedirect("index.jsp");
 

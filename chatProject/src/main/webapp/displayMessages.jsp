@@ -158,12 +158,12 @@ function winopen(path)
 		if (chatters[i].getName().equals(session.getAttribute("nickname")))
 		{
 	%>
-	<font face="Arial" size="2" color="blue"><%=chatters[i].getName() + " (" +chatters[i].getId() +")<br>"%></font>
+	<font face="Arial" size="2" color="blue"><%=chatters[i].getName() +"(" + chatters[i].getId()+")" +"<br>"%></font>
 	<%
 		}
 		else
 		{
-			out.write("<font face=\"Arial\" size=\"2\"><a href=\"javascript:winopen('viewinfo.jsp?chatterName="+chatters[i].getName() + "')\" title=\"View information about "+chatters[i].getName()+"\">"+ chatters[i].getName()+"</a> (" + chatters[i].getSex()+")</font><br>");
+			out.write("<font face=\"Arial\" size=\"2\"><a href=\"javascript:winopen('viewinfo.jsp?chatterName="+chatters[i].getName() + "')\" title=\"View information about "+chatters[i].getName()+"\">"+ chatters[i].getName()+"</a> (" + chatters[i].getId()+")</font><br>");
 		}
 	}
 

@@ -1,7 +1,6 @@
-<!-- Written by Sukhwinder Singh (ssruprai@hotmail.com -->
-<%-- Written by Sukhwinder Singh (ssruprai@hotmail.com --%>
 
-<%@ page errorPage="error.jsp" import="java.util.Set,java.util.Iterator,java.util.Map,chat.*"%>
+<%@ page errorPage="error.jsp" import="java.util.Set,java.util.Iterator,java.util.Map,chat.*"
+contentType="text/html; charset=UTF-8"%>
 <%
 String nickname = request.getParameter("chatterName");
 %>
@@ -9,8 +8,7 @@ String nickname = request.getParameter("chatterName");
 <HTML>
 <HEAD>
 <META http-equiv="pragma" content="no-cache">
-<meta name="Author" content="Sukhwinder Singh (ssruprai@hotmail.com">	
-<TITLE><%=nickname%>'s information</TITLE>
+<TITLE><%=nickname%>님의 정보</TITLE>
 <LINK rel="stylesheet" href="<%=request.getContextPath()%>/chat.css" type="text/css">
 </HEAD>
 
@@ -28,13 +26,13 @@ Chatter chatter = chatRoom.getChatter(nickname);
 <center>
 <table border="0" width="100%" cellpadding="0" cellspacing="0">
 <tr>
-	<TD valign="top"><h4>Nickname: </h4></td><TD valign="top"><%=nickname%></td>
+	<TD valign="top"><h4>대화명: </h4></td><TD valign="top"><%=nickname%></td>
 </tr>
 <tr>
-<TD valign="top"><h4>Sex: </h4></td><TD valign="top"><%=chatter.getSex()%></td>
+<TD valign="top"><h4>성별: </h4></td><TD valign="top"><%=chatter.getSex()%></td>
 </tr>
 <tr>
-<TD valign="top"><h4>Age: </h4></td><TD valign="top"><% int age = chatter.getAge();
+<TD valign="top"><h4>나이: </h4></td><TD valign="top"><% int age = chatter.getAge();
 		if(age == -1)
 		out.write("Not specified");
 		else
@@ -42,7 +40,7 @@ Chatter chatter = chatRoom.getChatter(nickname);
 		%></td>
 </tr>
 <tr>
-	<TD valign="top"><h4>Email: </h4></td><TD valign="top"><% String email = chatter.getEmail();
+	<TD valign="top"><h4>이메일: </h4></td><TD valign="top"><% String email = chatter.getEmail();
 			 if (email != null && email.length() >0)
 			  	 out.write(email);
 			 else
@@ -50,7 +48,7 @@ Chatter chatter = chatRoom.getChatter(nickname);
 		%></td>
 </tr>
 <tr>
-<TD valign="top"><H4>Comment: </h4></td><TD valign="top"><%
+<TD valign="top"><H4>코멘트: </h4></td><TD valign="top"><%
 				String comment = chatter.getComment();
 				if (comment != null && comment.length() >0)
 					out.write(comment);

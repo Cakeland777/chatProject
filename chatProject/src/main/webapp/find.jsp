@@ -13,6 +13,8 @@
 <TITLE>Find your friend</TITLE>
 <META http-equiv="pragma" content="no-cache">
 <LINK rel="stylesheet" href="<%=request.getContextPath()%>/chat.css" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
 </HEAD>
 <BODY>
 <%
@@ -32,11 +34,11 @@
 				}
 				if (roomName == null)
 				{
-					out.write("<h3><i>" + nickname + "</i> 님을 찾을 수 없습니다</h3>");
+					out.write("<h3>" + nickname + " 님을 찾을 수 없습니다</h3>");
 				}
 				else
 				{
-					out.write("<h3><i>" + nickname + "</i>님의 위치:" + roomName + "</h2>");
+					out.write("<h3>" + nickname + "님의 위치:" + roomName + "</h2>");
 				}
 
 			}
@@ -56,14 +58,10 @@
 <STRONG>유저명</STRONG>
 		<INPUT name="nickname" type="text" id="nickname">
 		<INPUT type="hidden" name="submitted" value="true">
-		<input type="submit" value="검색">
+
+		<input type="submit" class="btn btn-outline-info" value="검색">
+		<input type="button" class="btn btn-outline-info"onClick="window.close()" value="닫기">
 </FORM>
-<div align="center">
 
-<form name="closing">
-	<input type="button" onClick="window.close()" value="닫기">
-</form>
-
-</div>
 </BODY>
 </HTML>

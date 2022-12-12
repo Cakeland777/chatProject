@@ -39,61 +39,6 @@
   </head>
   <body> 
   <jsp:include page="navBar.jsp"/>
-<!--     <div id="container"> -->
-<!--       <h1 class="header">회원정보수정</h1> -->
-<!--       <form action ="updateMember" method="post" name="userForm"> -->
-<!--         <fieldset> -->
-  
-<!--      <div class="form-floating"> -->
-<%--       <input type="text" value="${user.uid}"class="form-control" id="uid"name="uid" placeholder="id" readonly="readonly"> --%>
-<!--       <label for="floatingInput">아이디</label> -->
-<!--     </div> -->
-  
-<!--      <div class="form-floating"> -->
-<!--       <input type="password" class="form-control" id="pwd1"name="pwd1" placeholder="pwd"> -->
-<!--       <label for="floatingInput">비밀번호</label> -->
-<!--     </div> -->
-<!--        <div class="form-floating"> -->
-<!--       <input type="password" class="form-control" id="pwd2"name="pwd2" placeholder="pwd2"> -->
-<!--       <label for="floatingInput">비밀번호확인</label> -->
-<!--     </div> -->
-<!--      <div class="form-floating"> -->
-<%--       <input type="text"  value="${user.name}" class="form-control" id="name"name="name" placeholder="name"> --%>
-<!--       <label for="floatingInput">이름</label> -->
-<!--     </div> -->
-<!--    <div class="form-floating"> -->
-<%--       <input type="text" value="${user.phone}"  class="form-control" id="phone"name="phone" placeholder="phone"> --%>
-<!--       <label for="floatingInput">휴대폰</label> -->
-<!--     </div> -->
-<!--    <div class="form-floating"> -->
-<%--       <input type="email" value="${user.email}" class="form-control" id="email"name="email" placeholder="email"> --%>
-<!--       <label for="floatingInput">이메일</label> -->
-<!--     </div> -->
-
-<!--    <div class="form-floating"> -->
-<%--       <input type="text" value="${user.address}" class="form-control" id="address"name="address" placeholder="address"> --%>
-<!--       <label for="floatingInput">주소</label> -->
-<!--     </div> -->
-<!-- <div class="mb-3"> -->
-<!-- <div class="form-check form-check-inline"> -->
-<!--   <input class="form-check-input" type="radio" name="sex" id="inlineRadio1" value="남"> -->
-<!--   <label class="form-check-label" for="inlineRadio1">남</label> -->
-<!-- </div> -->
-<!-- <div class="form-check form-check-inline"> -->
-<!--   <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="여"> -->
-<!--   <label class="form-check-label" for="inlineRadio2">여</label> -->
-<!-- </div> -->
-<!-- </div> -->
-         
-<!--         </fieldset> -->
-<!--         <div id="buttons"> -->
-<!--           <input type="submit" class="btn btn-secondary" value="수정하기"onclick="return check()"> -->
-<!--           <input type="reset" class="btn btn-secondary" onclick="location.href='detailMember'"  value="취소"> -->
-
-<!--         </div> -->
-<!--       </form> -->
-<!--     </div> -->
-
  <div id="container">
       <div class="registration-form">
        <form action ="updateMember"  method="post" name="userForm">
