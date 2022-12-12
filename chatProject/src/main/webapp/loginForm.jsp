@@ -29,37 +29,47 @@
     </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
        <script type="text/javascript" src="loginCheck.js"></script>
-   <link href="css/signin.css" rel="stylesheet">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/button.css">
   </head>
   <body class="text-center">
+  <jsp:include page="navBar.jsp"/>
 
-<main class="form-signin" >
-  <form action="loginMember" method="post" >
-<!--     <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-    <h1 class="header">로그인</h1>
 
-     <div class="form-floating">
-      <input type="text" class="form-control" id="uid"name="uid" placeholder="id" required>
-      <label for="floatingInput">아이디</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="pwd" name="pwd"placeholder="Password" required>
-      <label for="floatingPassword">비밀번호</label>
-    </div>
-    <div id="buttons">
-          <input type="submit" class="btn btn-secondary" value="로그인">
-        <input type="reset" class="btn btn-secondary"onclick="location.href='index.jsp'"  value="취소">
-        </div>
+ <div class="registration-form">
+       <form action ="loginMember" method="post" name="userForm">
+            <div class="form-icon">
+                <span><i class="icon icon-login"></i></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="uid"name="uid" placeholder="아이디"  required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control item"  id="pwd"name="pwd" placeholder="비밀번호"  required>
+            </div>
+  
+<div class="button_container" >
+
+  <button type="submit" class="btn" ><span>로그인</span></button>
+  <button type="button" class="btn" onclick="location.href='index.jsp'" ><span>취소</span></button>
+          </div>
+        </form>
+       </div>
    
-  </form>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
       <script>
 if (${status eq 'check'}) {
 	Swal.fire({
 		  position: 'center',
 		  icon:'error',
 		  title: '등록되지 않은 회원입니다',
+		  text: '입력정보를 확인해주세요',
 		  showConfirmButton: false,
-		  timer: 1500
+		  timer: 2000
 		})
 }
 else if (${status eq 'notuse' }) {
@@ -69,7 +79,7 @@ else if (${status eq 'notuse' }) {
 		  title: '미사용 회원입니다',
 		  text: '관리자에게 문의하세요',
 		  showConfirmButton: false,
-		  timer: 1500
+		  timer: 2000
 		})
 }
 else if (${status eq 'success' }) {
@@ -78,12 +88,12 @@ else if (${status eq 'success' }) {
 		  icon:'success',
 		  title: '가입완료',
 		  showConfirmButton: false,
-		  timer: 1500
+		  timer: 1800
 		})
 }
 
 </script>
-</main>
+
 
 
     

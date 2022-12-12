@@ -38,16 +38,20 @@ public class IdFind extends HttpServlet {
 	      Member result= db.findId(member);
 	      if(result!=null&&result.getName()!=null) {
 	    	  request.setAttribute("id", result.getUid());
-	  		RequestDispatcher dispatcher=request.getRequestDispatcher("/IdResult.jsp");
+	    	  request.setAttribute("status", "IdFind");
+	  		RequestDispatcher dispatcher=request.getRequestDispatcher("/FindInfo.jsp");
 	  		dispatcher.forward(request, response);
 	      }
 	      else {
-	    	  response.sendRedirect("FindId.jsp");
+	    	  request.setAttribute("status", "Fail");
+	  		RequestDispatcher dispatcher=request.getRequestDispatcher("/FindInfo.jsp");
+		  		dispatcher.forward(request, response);
+	
 	      }
 	      response.setContentType("text/html; charset=utf-8");
 	}
 		
-	
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

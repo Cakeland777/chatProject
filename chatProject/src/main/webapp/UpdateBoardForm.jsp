@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="member.*"
+    import="board.*"%>
 <%
 String Boardid=request.getParameter("id");
 String BoardTitle=request.getParameter("title");
@@ -44,18 +46,18 @@ String BoardContent=request.getParameter("content");
     <link rel="stylesheet" href="css/register.css">
   </head>
   <body> 
-  <jsp:include page="index.jsp"/>
+  <jsp:include page="navBar.jsp"/>
     <div id="container">
       <h1 class="header">게시글 수정</h1>
       <form action ="UpdateBoard" method="post" name="boardForm">
         <fieldset>
  
      <div class="form-floating">
-      <input type="text" class="form-control" id="uid" name="uid"  value="${userid}" readonly="readonly">
+      <input type="text" class="form-control" id="uid" name="uid"  value="${user.uid}" readonly="readonly">
       <label for="floatingInput">작성자 아이디</label>
     </div>
          <div class="form-floating">
-      <input type="text" class="form-control" id="name" name="name"  value="${name}" readonly="readonly">
+      <input type="text" class="form-control" id="name" name="name"  value="${user.name}" readonly="readonly">
       <label for="floatingInput">작성자 이름</label>
     </div>
   <select class="form-select" id="type" name="type" aria-label="Default select example" required>

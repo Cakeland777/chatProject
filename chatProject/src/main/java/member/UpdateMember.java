@@ -29,7 +29,7 @@ public class UpdateMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userid=request.getParameter("userid");
+		String userid=request.getParameter("uid");
 		MemberDB db=MemberDB.getInstance();
 		Member member=db.getMember(userid);
 		request.setAttribute("member", member);
@@ -62,7 +62,7 @@ public class UpdateMember extends HttpServlet {
 		MemberDB db=MemberDB.getInstance();
 		db.updateMember(member);
 		HttpSession session=request.getSession();
-		session.setAttribute("name",member.getName());
+		session.setAttribute("user",member);
 		response.sendRedirect("index.jsp");
 	}
 

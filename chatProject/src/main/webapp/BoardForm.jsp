@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="member.*"
+    %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -53,7 +55,7 @@
   <body> 
    <jsp:include page="navBar.jsp"/>
     <div id="container">
-      <h1 class="header">게시글 등록</h1>
+
       <form action ="InsertBoard" method="post" name="boardForm">
         <fieldset>
     
@@ -64,11 +66,11 @@
   <option value="Q&A">Q&A</option>
 </select>
          <div class="form-floating">
-      <input type="hidden" class="form-control" id="uid" name="uid"  value="${userid}" readonly="readonly">
-      <label for="floatingInput"></label>
+      <input type="text" class="form-control" id="uid" name="uid"  value="${user.uid}" readonly="readonly">
+      <label for="floatingInput">작성자</label>
     </div>
          <div class="form-floating">
-      <input type="hidden" class="form-control" id="name" name="name"  value="${name}" readonly="readonly">
+      <input type="hidden" class="form-control" id="name" name="name"  value="${user.name}" readonly="readonly">
       <label for="floatingInput"></label>
     </div>
      <div class="form-floating">
@@ -77,8 +79,8 @@
     </div>
 
 <div class="textcontainer">
-<!--   <textarea class="summernote" name="content"></textarea>     -->
-	<textarea name="content" id="editor"></textarea>
+  <textarea class="summernote" name="content"></textarea>    
+<!-- 	<textarea name="content" id="editor"></textarea> -->
 </div>
 <script>
 $('.summernote').summernote({

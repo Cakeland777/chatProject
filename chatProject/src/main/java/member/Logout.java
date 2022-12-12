@@ -29,12 +29,10 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		if(session.getAttribute("userid")!=null) {
-			session.removeAttribute("userid");
+		if(session.getAttribute("user")!=null) {
+			session.invalidate();
 		}
-		if(session.getAttribute("name")!=null) {
-			session.removeAttribute("name");
-		}
+
 		response.sendRedirect("index.jsp");
 	}
 

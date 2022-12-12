@@ -2,18 +2,8 @@
     pageEncoding="UTF-8"
     import="member.*"
     %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%
-String id = (String)session.getAttribute("userid");
-String name = (String)session.getAttribute("name");
-// String admin= (String)session.getAttribute("admin");
-// String pwd= (String)session.getAttribute("pwd");
-// String phone= (String)session.getAttribute("phone");
-// String address= (String)session.getAttribute("address");
-// String email= (String)session.getAttribute("email");
-Member member=(Member)request.getAttribute("member");
-session.setAttribute("userid", id);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +19,14 @@ session.setAttribute("userid", id);
    color:white;
    text-align: center;
    }
+body {
+  margin: 0;
+  height: 100%;
+  background-image: linear-gradient(to top, #d9afd9 0%, #ADD8E6 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 
 .wrap{
 
@@ -46,38 +44,15 @@ session.setAttribute("userid", id);
 </style>
 <title>메인</title>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 </head>
 <body>
 <script>
 
-function btn(){
-	Swal.fire({
-		  title: '정말 탈퇴하시겠습니까??',
-		  text: "",
-		  icon: 'warning',
-		  showCancelButton: true,
-		  confirmButtonColor: 'skyblue',
-		  cancelButtonColor: 'lightcoral',
-		  confirmButtonText: '네',
-		cancelButtonText:'아니오',
-			allowOutsideClick:false
-		}).then((result) => {
-		  if (result.isConfirmed) {
-		    Swal.fire({
-		    	  position: 'center',
-		    	  icon: 'success',
-		    	  title: '탈퇴완료',
-		    	  showConfirmButton: false,
-		    	  timer: 1500
-		    	})
-		    setTimeout("location.href='DeleteMember'",2000);
-		    return true
-		  }
-		})
-}
+
 </script>
-<c:if test="${member eq null}">
-<%if(id==null){%>
+<c:choose>
+<c:when test ="${user eq null}">
 <h1 class="header">&nbsp;</h1>
 <div class="wrap">
 <div class="card" style="width: 18rem; " >
@@ -91,26 +66,19 @@ function btn(){
 <i class="bi bi-pencil-square"color="mediumturquoise"  width="20" height="20" ></i>
     <a href="user.jsp" class="btn btn-outline-info stretched-link">회원가입</a>
   </div>
-</div><div class="card" style="width: 18rem; " >
+</div>
+<div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-question-circle-fill" color="mediumturquoise"  width="20" height="20"></i>
-    <a href="FindId.jsp" class="btn btn-outline-info stretched-link">아이디찾기</a>
-  </div>
-</div><div class="card" style="width: 18rem; " >
-  <div class="card-body">
-<i class="bi bi-question-circle-fill" color="mediumturquoise"  width="20" height="20"></i>
-    <a href="FindPwd.jsp" class="btn btn-outline-info stretched-link">비밀번호찾기</a>
+    <a href="FindInfo.jsp" class="btn btn-outline-info stretched-link">회원정보 찾기</a>
   </div>
 </div>
+
 </div>
-
-
-
 </body>
 </html>
-
-<%}
-else if(admin.equals("1")){%>
+</c:when>
+<c:when test="${user.admin == '1'}">
 <h2 class="header">관리자 페이지</h2>
 <div class="wrap">
 <div class="card" style="width: 18rem; " >
@@ -135,9 +103,9 @@ else if(admin.equals("1")){%>
 
 </body>
 </html>
-<%} 
-else{%>
-	<h2 class="header"><%= name%>님 안녕하세요</h2>
+</c:when>
+<c:otherwise>
+	<h2 class="header">${user.name}님 안녕하세요</h2>
 	<div class="wrap">
 <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -155,7 +123,7 @@ else{%>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-card-text"color="mediumturquoise"  width="20" height="20"></i>
-    <a href="chatPage.jsp" class="btn btn-outline-info stretched-link">채팅</a>
+    <a href="listrooms.jsp" class="btn btn-outline-info stretched-link">채팅</a>
   </div>
 </div>
 <div class="card" style="width: 18rem;">
@@ -167,4 +135,4 @@ else{%>
 </div>
 	
 </body>
-</html><%}%>
+</html></c:otherwise></c:choose>

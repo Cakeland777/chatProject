@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import member.Member;
 
 import java.io.IOException;
 
@@ -32,8 +33,8 @@ public class BoardView extends HttpServlet {
 		String id = request.getParameter("id");
 		Board viewBoard = db.getBoard(id);
 		HttpSession session = request.getSession();
-		String userid = (String)session.getAttribute("userid");
-		if (userid != null && viewBoard != null &&  userid.equals(viewBoard.getUserid())) {
+		Member user = (Member)session.getAttribute("user");
+		if (user.getUid() != null && viewBoard != null &&  user.getUid().equals(viewBoard.getUserid())) {
 			request.setAttribute("updated", true);	
 		} else {
 			request.setAttribute("updated", false);	

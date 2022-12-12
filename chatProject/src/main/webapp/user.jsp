@@ -8,43 +8,20 @@
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>회원 가입</title>
-    <style>
-      #container {
-        width:600px;
-        margin:10px auto;
-      }
-      #buttons{
-       justify-content: center;
-       }
-       .side{
-       position:sticky;
-       position:-webkit-sticky;
-       top:-60px;
-       }
-      ul{
-   list-style:none;
-   }
-   .header{
-   background-color: lightblue;
-   color:white;
-   }
-   .mb-3{
-   margin:10px;
-   padding:10px;
-   }
-   .form-floating{
-   margin:10px;
-   }
-    </style>
+ 
    
 <script type="text/javascript" src="userCheck.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/button.css">
   </head>
   <body> 
   <jsp:include page="navBar.jsp"/>
   <script>
-  
+
+	 
   if (${status eq 'fail'}) {
 		Swal.fire({
 			  position: 'center',
@@ -57,59 +34,51 @@
   
   </script>
   <article>
-    <div id="container">
-      <h1 class="header">회원 가입</h1>
-      <form action ="register" method="post" name="userForm">
-        <fieldset>
-  
-     <div class="form-floating">
-      <input type="text" class="form-control" id="uid"name="uid" placeholder="id">
-      <label for="floatingInput">아이디</label>
-    </div>
-  
-     <div class="form-floating">
-      <input type="password" class="form-control" id="pwd1"name="pwd1" placeholder="pwd">
-      <label for="floatingInput">비밀번호</label>
-    </div>
-       <div class="form-floating">
-      <input type="password" class="form-control" id="pwd2"name="pwd2" placeholder="pwd2">
-      <label for="floatingInput">비밀번호확인</label>
-    </div>
-     <div class="form-floating">
-      <input type="text" class="form-control" id="name"name="name" placeholder="name">
-      <label for="floatingInput">이름</label>
-    </div>
-   <div class="form-floating">
-      <input type="text" class="form-control" id="phone"name="phone" placeholder="phone">
-      <label for="floatingInput">휴대폰</label>
-    </div>
-   <div class="form-floating">
-      <input type="email" class="form-control" id="email"name="email" placeholder="email">
-      <label for="floatingInput">이메일</label>
-    </div>
 
-   <div class="form-floating">
-      <input type="text" class="form-control" id="address"name="address" placeholder="address">
-      <label for="floatingInput">주소</label>
-    </div>
-<div class="mb-3">
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sex" id="inlineRadio1" value="남">
-  <label class="form-check-label" for="inlineRadio1">남</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="여">
-  <label class="form-check-label" for="inlineRadio2">여</label>
-</div>
-</div>
-         
-        </fieldset>
-        <div id="buttons">
-          <input type="submit" class="btn btn-secondary" value="가입하기"onclick="return check()">
-          <input type="reset" class="btn btn-secondary" onclick="location.href='index.jsp'"  value="취소">
+     <div class="registration-form">
+       <form action ="register" method="post" name="userForm">
+            <div class="form-icon">
+                <span><i class="icon icon-user"></i></span>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control item" id="uid"name="uid" placeholder="아이디"  required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control item"  id="pwd1"name="pwd1" placeholder="비밀번호"  required>
+            </div>
+                <div class="form-group">
+                <input type="password" class="form-control item"  id="pwd2"name="pwd2" placeholder="비밀번호 확인"  required>
+            </div>
+           
+                <div class="form-group">
+                <input type="text" class="form-control item"  id="name"name="name" placeholder="이름">
+            </div>
+               <div class="form-group">
+                <input type="text" class="form-control item"  id="phone"name="phone" placeholder="전화번호">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control item"  id="email"name="email" placeholder="이메일">
+            </div>
+             <div class="form-group">
+                <input type="text" class="form-control item"  id="address"name="address" placeholder="주소">
+            </div>
+            <div class="form-group">
+                <input type="radio" name="sex" id="inlineRadio1" value="남">
+                남
+  
+                <input type="radio" name="sex" id="inlineRadio1" value="여">
+                  여
+            </div>
+       
+<div class="button_container" >
 
-        </div>
-      </form>
-    </div>           
+  <button type="submit" class="btn" onclick="return check()"><span>가입하기</span></button>
+  <button type="button" class="btn" onclick="location.href='index.jsp'" ><span>취소</span></button>
+          </div>
+        </form>
+       </div>
+   
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   </body>
 </html>

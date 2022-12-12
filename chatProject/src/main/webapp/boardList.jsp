@@ -21,11 +21,13 @@ background-color: lightblue;
     position: relative;
     border: none;
     display: inline-block;
-    padding: 15px 30px ;
+    padding: 15px 20px ;
+    margin-top:10px;
     margin-bottom:10px;
+
     border-radius: 15px;
     font-family: "paybooc-Light", sans-serif;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     font-weight: 500;
     transition: 0.25s;
@@ -80,7 +82,8 @@ a {
 
 %>
 <jsp:include page="navBar.jsp"/>
-<hr>
+
+<div class="form" align="center">
 <form method="post" action="boardList.jsp">
   <select class="form-select" id="type" name="type" aria-label="Default select example" required>
   <option selected>선택</option>
@@ -97,8 +100,8 @@ a {
         글 작성
     </button>
 
-</form>
-<table class="table table-sm table-hover">
+</form></div>
+<table class="table table-sm table-hover" style="margin-left: auto; margin-right: auto;">
             <thead style="border-top: 1px solid #dee2e6;" >
                 <tr class="text-center"  bgcolor="lightblue" style="font-weight: bold"; >
                     <th style="font-weight: bold; font-size: 16px;">번호</th>

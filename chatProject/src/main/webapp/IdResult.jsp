@@ -50,6 +50,8 @@
           <input type="reset" class="btn btn-secondary" onclick="location.href='index.jsp'"  value="메인으로">
         </div>
       </form>
-    </div>           
+    </div> 
+    
+              
   </body>
 </html>

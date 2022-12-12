@@ -27,7 +27,6 @@
 	System.out.println("size = " + listMembers.size());
 	
 	for (Member member : listMembers) { 
-		System.out.println("bean = " + member);
 		request.setAttribute("member", member);
 %>
 		<tr>

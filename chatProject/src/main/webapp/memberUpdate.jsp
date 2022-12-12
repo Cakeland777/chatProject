@@ -31,49 +31,104 @@
    margin:10px;
    }
     </style>
-   
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <script type="text/javascript" src="updateCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="css/register.css">
+     <link rel="stylesheet" href="css/button.css">
   </head>
   <body> 
   <jsp:include page="navBar.jsp"/>
-    <div id="container">
-      <h1 class="header">회원정보수정</h1>
-      <form action ="updateMember" method="post" name="userForm">
-        <fieldset>
+<!--     <div id="container"> -->
+<!--       <h1 class="header">회원정보수정</h1> -->
+<!--       <form action ="updateMember" method="post" name="userForm"> -->
+<!--         <fieldset> -->
   
+<!--      <div class="form-floating"> -->
+<%--       <input type="text" value="${user.uid}"class="form-control" id="uid"name="uid" placeholder="id" readonly="readonly"> --%>
+<!--       <label for="floatingInput">아이디</label> -->
+<!--     </div> -->
+  
+<!--      <div class="form-floating"> -->
+<!--       <input type="password" class="form-control" id="pwd1"name="pwd1" placeholder="pwd"> -->
+<!--       <label for="floatingInput">비밀번호</label> -->
+<!--     </div> -->
+<!--        <div class="form-floating"> -->
+<!--       <input type="password" class="form-control" id="pwd2"name="pwd2" placeholder="pwd2"> -->
+<!--       <label for="floatingInput">비밀번호확인</label> -->
+<!--     </div> -->
+<!--      <div class="form-floating"> -->
+<%--       <input type="text"  value="${user.name}" class="form-control" id="name"name="name" placeholder="name"> --%>
+<!--       <label for="floatingInput">이름</label> -->
+<!--     </div> -->
+<!--    <div class="form-floating"> -->
+<%--       <input type="text" value="${user.phone}"  class="form-control" id="phone"name="phone" placeholder="phone"> --%>
+<!--       <label for="floatingInput">휴대폰</label> -->
+<!--     </div> -->
+<!--    <div class="form-floating"> -->
+<%--       <input type="email" value="${user.email}" class="form-control" id="email"name="email" placeholder="email"> --%>
+<!--       <label for="floatingInput">이메일</label> -->
+<!--     </div> -->
+
+<!--    <div class="form-floating"> -->
+<%--       <input type="text" value="${user.address}" class="form-control" id="address"name="address" placeholder="address"> --%>
+<!--       <label for="floatingInput">주소</label> -->
+<!--     </div> -->
+<!-- <div class="mb-3"> -->
+<!-- <div class="form-check form-check-inline"> -->
+<!--   <input class="form-check-input" type="radio" name="sex" id="inlineRadio1" value="남"> -->
+<!--   <label class="form-check-label" for="inlineRadio1">남</label> -->
+<!-- </div> -->
+<!-- <div class="form-check form-check-inline"> -->
+<!--   <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="여"> -->
+<!--   <label class="form-check-label" for="inlineRadio2">여</label> -->
+<!-- </div> -->
+<!-- </div> -->
+         
+<!--         </fieldset> -->
+<!--         <div id="buttons"> -->
+<!--           <input type="submit" class="btn btn-secondary" value="수정하기"onclick="return check()"> -->
+<!--           <input type="reset" class="btn btn-secondary" onclick="location.href='detailMember'"  value="취소"> -->
+
+<!--         </div> -->
+<!--       </form> -->
+<!--     </div> -->
+
+ <div id="container">
+      <div class="registration-form">
+       <form action ="updateMember"  method="post" name="userForm">
+            <div class="form-icon">
+                <span><i class="icon icon-pencil"></i></span>
+            </div>
      <div class="form-floating">
-      <input type="text" value="${userid}"class="form-control" id="uid"name="uid" placeholder="id" readonly="readonly">
+      <input type="text" value="${user.uid}"class="form-control" id="uid"name="uid" placeholder="id" readonly="readonly">
       <label for="floatingInput">아이디</label>
     </div>
-  
-     <div class="form-floating">
-      <input type="password" class="form-control" id="pwd1"name="pwd1" placeholder="pwd">
+          <div class="form-floating">
+      <input type="password" class="form-control" id="pwd1"name="pwd1" >
       <label for="floatingInput">비밀번호</label>
     </div>
-       <div class="form-floating">
-      <input type="password" class="form-control" id="pwd2"name="pwd2" placeholder="pwd2">
+           <div class="form-floating">
+      <input type="password" class="form-control" id="pwd2"name="pwd2" >
       <label for="floatingInput">비밀번호확인</label>
     </div>
-     <div class="form-floating">
-      <input type="text"  value="${name}" class="form-control" id="name"name="name" placeholder="name">
+           <div class="form-floating">
+      <input type="text" value="${user.name}"class="form-control" id="name"name="name" >
       <label for="floatingInput">이름</label>
     </div>
-   <div class="form-floating">
-      <input type="text" value="${phone}"  class="form-control" id="phone"name="phone" placeholder="phone">
-      <label for="floatingInput">휴대폰</label>
+                  <div class="form-floating">
+      <input type="text" value="${user.phone}"class="form-control" id="phone"name="phone" >
+      <label for="floatingInput">전화번호</label>
     </div>
-   <div class="form-floating">
-      <input type="email" value="${name}" class="form-control" id="email"name="email" placeholder="email">
+                       <div class="form-floating">
+      <input type="text" value="${user.email}"class="form-control" id="email"name="email" >
       <label for="floatingInput">이메일</label>
     </div>
-
-   <div class="form-floating">
-      <input type="text" value="${address}" class="form-control" id="address"name="address" placeholder="address">
+     <div class="form-floating">
+      <input type="text" value="${user.address}"class="form-control" id="address"name="address" >
       <label for="floatingInput">주소</label>
     </div>
-<div class="mb-3">
+  <div class="mb-3">
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="sex" id="inlineRadio1" value="남">
   <label class="form-check-label" for="inlineRadio1">남</label>
@@ -83,14 +138,15 @@
   <label class="form-check-label" for="inlineRadio2">여</label>
 </div>
 </div>
-         
-        </fieldset>
-        <div id="buttons">
-          <input type="submit" class="btn btn-secondary" value="수정하기"onclick="return check()">
-          <input type="reset" class="btn btn-secondary" onclick="location.href='detailMember'"  value="취소">
-
-        </div>
-      </form>
-    </div>           
+<div class="button_container" >
+     			<button type="submit"class="btn" onclick="return check()" ><span>수정하기</span></button>
+              <button type="button" class="btn" onclick="location.href='detailMember'" ><span>돌아가기</span></button>
+          </div>
+        </form>
+       </div>
+   </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>         
+               
   </body>
 </html>

@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="5.0">
-  <display-name>chatProject</display-name>
+  	<display-name>Chat Application</display-name>
+	<description>..</description>
+
+	<context-param>
+		<param-name>chatpropertyfile</param-name>
+
+		<param-value>chat.properties</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>saveRooms</param-name>
+
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>adminEmail</param-name>
+		<!-- Add an e-mail address of the administrator of this web site. -->
+		<param-value>minishelll777@gmail.com</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>sessionTimeout</param-name>
+	
+		<param-value>30</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>refreshAfter</param-name>
+
+		<param-value>5</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>maxNoOfMessages</param-name>
+
+		<param-value>25</param-value>
+	</context-param>
+
+
+	<listener>
+		<listener-class>chat.SessionListener</listener-class>
+	</listener>
+
+
+	<servlet>
+		<servlet-name>saveInfo</servlet-name>
+		<servlet-class>chat.SaveInfoServlet</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>saveInfo</servlet-name>
+		<url-pattern>/servlet/saveInfo</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -8,14 +67,5 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>Chatting</display-name>
-    <servlet-name>Chatting</servlet-name>
-    <servlet-class>chat.Chatting</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Chatting</servlet-name>
-    <url-pattern>/Chatting</url-pattern>
-  </servlet-mapping>
+
 </web-app>

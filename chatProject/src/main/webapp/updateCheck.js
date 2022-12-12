@@ -32,7 +32,7 @@ function check() {
         return false;
     } else if (document.userForm.pwd1.value != document.userForm.pwd2.value) {
 		       Swal.fire(
-		  '비밀번호와 비밀번호 확인값이 다릅니다',
+		  '비밀번호 확인값이 다릅니다',
 		  '',
 		  'warning'
 		)

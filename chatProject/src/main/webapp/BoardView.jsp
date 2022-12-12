@@ -1,7 +1,7 @@
 <%@page import="board.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%	Board b = (Board) request.getAttribute("viewBoard");
 	String userid = (String)session.getAttribute("userid");
 	session.setAttribute("userid", userid);%>
@@ -53,24 +53,26 @@ color:white;}
             </div>
             <br>
 
-<%if(b.getUserid().equals(userid)){%>
+<c:choose>
+<c:when test ="${updated eq true}">
 <input type="submit"class="btn btn-outline-info stretched-link" value="수정" formaction="../UpdateBoardForm.jsp">
 <input type="submit" class="btn btn-outline-info stretched-link"value="삭제" formaction="../DeleteBoard">
 
 <input type="reset" class="btn btn-outline-info stretched-link" onclick="location.href='/chatProject/boardList.jsp'"  value="돌아가기">
 </form>
 
- <%}
-else if(userid.equals("admin")){%>
+ </c:when>
+<c:when test ="${user.admin eq '1'}">
 <input type="submit" class="btn btn-outline-info stretched-link"value="삭제" formaction="../DeleteBoard">
 
 <input type="reset" class="btn btn-outline-info stretched-link" onclick="location.href='/chatProject/boardList.jsp'"  value="돌아가기">
 </form>
- <%}
-else{%>
+</c:when>
+<c:otherwise>
  <input type="reset" class="btn btn-outline-info stretched-link" onclick="location.href='/chatProject/boardList.jsp'"  value="돌아가기">
  </form>
- <%}%>
+</c:otherwise>
+</c:choose>
 
 
 </body>

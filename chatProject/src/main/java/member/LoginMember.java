@@ -40,17 +40,9 @@ public class LoginMember extends HttpServlet {
 	      Member result= db.login(member);
 	      HttpSession session=request.getSession();
 	      if(result!=null&&result.getName()!=null&&result.getLogin_check().equals("T")) {
-	    	  session.setAttribute("userid", result.getUid());
-	    	  session.setAttribute("name",result.getName());
-//	    	  session.setAttribute("admin",result.getAdmin());
-//	    	  session.setAttribute("pwd",result.getPwd());
-//	    	  session.setAttribute("phone",result.getPhone());
-//	    	  session.setAttribute("address",result.getAddress());
-//	    	  session.setAttribute("email",result.getEmail());
-//	    	  response.sendRedirect("index.jsp");
-	    	  request.setAttribute("member", result);
-	    	  RequestDispatcher dispatcher=request.getRequestDispatcher("index.jsp");
-	    	  dispatcher.forward(request, response);
+	    	  session.setAttribute("user", result);
+	    	  response.sendRedirect("index.jsp");
+
 
 
 	      }

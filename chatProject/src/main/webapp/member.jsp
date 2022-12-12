@@ -33,6 +33,7 @@ text-align: center;
      background-color: skyblue;
 }
 
+
 </style>
   <meta charset="UTF-8">
 <title>회원 정보</title>
@@ -53,7 +54,7 @@ request.setCharacterEncoding( "utf-8" );
 <input type="submit"class="btn btn-outline-secondary" style="margin-bottom: 5px;" value=" 조회하기">
 
 </form></div>
- <table border='1' width='800' align='center'>
+ <table border='1' width='800' align='center' style="background-color: white">
    <tr align='center'  bgcolor='lightblue'> 
    <div class="title">
      <td>아이디</td>

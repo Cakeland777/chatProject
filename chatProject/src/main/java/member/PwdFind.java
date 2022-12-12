@@ -38,12 +38,16 @@ public class PwdFind extends HttpServlet {
 	      Member result= db.findPwd(member);
 	      if(result!=null&&result.getName()!=null) {
 	    	  request.setAttribute("pwd", result.getPwd());
-		  		RequestDispatcher dispatcher=request.getRequestDispatcher("/PwdResult.jsp");
+	    	  request.setAttribute("status", "PwdFind");
+	  		RequestDispatcher dispatcher=request.getRequestDispatcher("/FindInfo.jsp");
 		  		dispatcher.forward(request, response);
 	    	 
 	      }
 	      else {
-	    	  response.sendRedirect("FindPwd.jsp");
+	    	  request.setAttribute("status", "Fail");
+	  		RequestDispatcher dispatcher=request.getRequestDispatcher("/FindInfo.jsp");
+		  		dispatcher.forward(request, response);
+
 	      }
 	      response.setContentType("text/html; charset=utf-8");
 	}
