@@ -19,7 +19,7 @@ contentType="text/html; charset=UTF-8"
 </HEAD>
 <body>
 <jsp:include page="navBar.jsp"/>
-<!-- <FRAMESET rows="80%,20%"> -->
+
 <iframe src="displayMessages.jsp#current" name="MessageWin" width="100%" height="470px" ></iframe> 
 <iframe src="sendMessage.jsp" name="TypeWin" width="100%" height="170px" ></iframe> 
 
