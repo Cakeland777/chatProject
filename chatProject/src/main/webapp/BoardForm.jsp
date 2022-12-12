@@ -14,6 +14,9 @@
     <meta charset="UTF-8">
     <title>게시글 등록</title>
     <style>
+    body{
+    background-color: white;
+    }
       #container {
         width:600px;
         margin:10px auto;
@@ -51,10 +54,11 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/translations/ko.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="css/register.css">
+     <link rel="stylesheet" href="css/button.css">
   </head>
   <body> 
    <jsp:include page="navBar.jsp"/>
-    <div id="container">
+    <div class="registration-form">
 
       <form action ="InsertBoard" method="post" name="boardForm">
         <fieldset>
@@ -79,13 +83,13 @@
     </div>
 
 <div class="textcontainer">
-  <textarea class="summernote" name="content"></textarea>    
+  <textarea style="text-align: center; border-right: 5px;" class="summernote" name="content"></textarea>    
 <!-- 	<textarea name="content" id="editor"></textarea> -->
 </div>
 <script>
 $('.summernote').summernote({
-	  height: 150, 
-	  width:600,
+	  height: 300, 
+	  width:450,
 	  minHeight: null,             // 최소 높이
 	  maxHeight: null,  
 	  lang: "ko-KR",
@@ -110,9 +114,9 @@ ClassicEditor
 } );
 </script>
         </fieldset>
-        <div id="buttons">
-          <input type="submit" class="btn btn-secondary" value="등록하기"onclick="location.href='boardList.jsp'">
-          <input type="reset" class="btn btn-secondary" onclick="location.href='boardList.jsp'"  value="취소">
+     <div class="button_container" >
+          <input type="submit" class="btn" value="등록하기"onclick="location.href='boardList.jsp'">
+          <input type="reset" class="btn" onclick="location.href='boardList.jsp'"  value="취소">
 
         </div>
       </form>

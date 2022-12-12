@@ -23,6 +23,7 @@ nav {
 /*   justify-content: center; */
   position: relative;
   background-color:#ADD8E6 ;
+  
 }
 
 ul, li {
@@ -35,6 +36,7 @@ ul, li {
   float: left;
   position: relative;
   width: 150px;
+  
 }
 
 #main-menu > li > a {
@@ -47,6 +49,8 @@ ul, li {
   padding: 14px 36px;
   border-right: 1px solid rgba(0,0,0,0.15);
   text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  z-index:-1;
+   
   
 }
 
@@ -62,11 +66,13 @@ ul, li {
   transition: all 0.15s ease-in;
    width: 150px;
    opacity: 0.5;
+   
 }
 
 #sub-menu > li {
   padding: 16px 28px;
   border-bottom: 1px solid rgba(0,0,0,0.15);
+  
 }
 
 #sub-menu > li >  a {

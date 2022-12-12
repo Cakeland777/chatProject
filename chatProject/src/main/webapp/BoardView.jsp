@@ -21,7 +21,7 @@ color:white;}
 <body>
 
   <jsp:include page="navBar.jsp"/>
-<hr>
+<br/>
  
 
 	<form  method="post" name="boardForm">
@@ -30,22 +30,22 @@ color:white;}
 <div class="container">
     <div class="row-mt-5">
         <div class="col-12">
-            <!--본문-->
+
             <div class="card" style="width: 100%;">
-                <!--제목,분류,작성일-->
+
                 <div class="card-header">
                     <span style="font-size: 18px; color: gray;">[${viewBoard.type}]</span><strong style="font-size: 18px;">${viewBoard.title}</strong>&nbsp;&nbsp;
                     <span style="float:right;">${viewBoard.time}</span>
                 </div>
                 <div class="card-body" style="min-height: 400px; color:black;">
-                    <!--작성자, 조회수-->
+                 
                     <div>
                         <span><i class="fas fa-user-edit"></i>&nbsp;작성자 : ${viewBoard.name}(${viewBoard.userid})</span>
                         <span style="float:right;">조회수 : ${viewBoard.count}</span>
                     </div>
                     <hr>
                
-                    <!--내용-->
+          
                     <div>
                     ${viewBoard.content}
                     </div>
@@ -73,7 +73,5 @@ color:white;}
  </form>
 </c:otherwise>
 </c:choose>
-
-
 </body>
 </html>

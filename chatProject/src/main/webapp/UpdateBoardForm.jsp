@@ -44,11 +44,12 @@ String BoardContent=request.getParameter("content");
    
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="css/register.css">
+     <link rel="stylesheet" href="css/button.css">
   </head>
   <body> 
   <jsp:include page="navBar.jsp"/>
-    <div id="container">
-      <h1 class="header">게시글 수정</h1>
+      <div class="registration-form">
+
       <form action ="UpdateBoard" method="post" name="boardForm">
         <fieldset>
  
@@ -81,7 +82,7 @@ String BoardContent=request.getParameter("content");
 <script>
 $('.summernote').summernote({
 	  height: 300, 
-	  width:1000,// 에디터 높이
+	  width:450,// 에디터 높이  
 	  minHeight: null,             // 최소 높이
 	  maxHeight: null,  
 	  lang: "ko-KR",
@@ -103,8 +104,8 @@ $('.summernote').summernote({
 
         </fieldset>
         <div id="buttons">
-          <input type="submit" class="btn btn-secondary" value="수정하기">
-          <input type="reset" class="btn btn-secondary" onclick=window.history.back(); value="취소">
+          <input type="submit" class="btn" value="수정하기">
+          <input type="reset" class="btn" onclick=window.history.back(); value="취소">
 
         </div>
       </form>

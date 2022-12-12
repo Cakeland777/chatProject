@@ -85,7 +85,7 @@ a {
 							<INPUT type="hidden" name="nickname" value="<%=session.getAttribute("nickname")%>">
 							 <button class="w-btn w-btn-blue" name="submit"  type="submit"> 전송</button>
 							
-<!-- 							<INPUT name="submit" type="submit" value="전송"> -->
+
 						</TD>
 					</FORM>
 				</TR>
