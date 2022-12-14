@@ -139,27 +139,6 @@ a {
    }
 %>	
 </table>
-<script>
-if (${message eq 'insert'}) {
-	Swal.fire({
-		  position: 'center',
-		  icon:'success',
-		  title: '게시글 등록 완료',
-		  text: '',
-		  showConfirmButton: false,
-		  timer: 1500
-		})
-}
-else if (${message eq 'noinsert'}) {
-	Swal.fire({
-		  position: 'center',
-		  icon:'error',
-		  title: '게시글 등록 실패',
-		  text: '',
-		  showConfirmButton: false,
-		  timer: 1500
-		})
-}
-</script>
+
 </body>
 </html>

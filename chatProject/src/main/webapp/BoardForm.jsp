@@ -60,7 +60,7 @@
    <jsp:include page="navBar.jsp"/>
     <div class="registration-form">
 
-      <form action ="InsertBoard" method="post" name="boardForm">
+      <form method="post" id="boardForm" name="boardForm" enctype="multipart/form-data">
         <fieldset>
     
   <select class="form-select" id="type" name="type" aria-label="Default select example" required>
@@ -86,6 +86,9 @@
   <textarea style="text-align: center; border-right: 5px;" class="summernote" name="content"></textarea>    
 <!-- 	<textarea name="content" id="editor"></textarea> -->
 </div>
+   <div class="form-floating">
+      <input type="file" class="form-control" id="filename"name="filename" multiple="multiple" >
+    </div>
 <script>
 $('.summernote').summernote({
 	  height: 300, 
@@ -113,9 +116,29 @@ ClassicEditor
     console.error( error );
 } );
 </script>
+<script type="text/javascript">
+let boardForm= document.querySelector("#boardForm");
+boardForm.addEventListener("submit", (e) => {
+   e.preventDefault();
+
+   fetch('/chatProject/InsertBoard', 
+      {
+         method: 'POST',
+          cache: 'no-cache',
+          body: new FormData(boardForm)
+      })
+      .then(response => response.json())
+      .then(jsonResult => {
+         if (jsonResult.status=true) {
+        	 location.href=jsonResult.url;
+         }
+      });
+});
+
+</script>
         </fieldset>
      <div class="button_container" >
-          <input type="submit" class="btn" value="등록하기">
+          <input type="submit" name="write" class="btn" value="등록하기">
           <input type="reset" class="btn" onclick="location.href='boardList.jsp'"  value="취소">
 
         </div>

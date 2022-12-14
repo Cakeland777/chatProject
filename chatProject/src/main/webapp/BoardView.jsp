@@ -44,13 +44,22 @@ color:white;}
                         <span style="float:right;">조회수 : ${viewBoard.count}</span>
                     </div>
                     <hr>
-               
-          
                     <div>
                     ${viewBoard.content}
                     </div>
+                              <c:choose>
+		<c:when test ="${fileName ne null}">
+		<img src="boardDown?id=${viewBoard.id}"  width=300 height=300 /><br>
+                     <div>
+                    첨부파일 : <a href="boardDown?id=${viewBoard.id}">${fileName}</a>
+                    </div>
+                    </c:when>
+                    </c:choose>
                 </div>
             </div>
+
+              <hr>
+           
             <br>
 
 <c:choose>
