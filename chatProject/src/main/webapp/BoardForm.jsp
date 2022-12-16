@@ -55,6 +55,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>    
     <link rel="stylesheet" href="css/register.css">
      <link rel="stylesheet" href="css/button.css">
+
   </head>
   <body> 
    <jsp:include page="navBar.jsp"/>
@@ -87,7 +88,7 @@
 <!-- 	<textarea name="content" id="editor"></textarea> -->
 </div>
    <div class="form-floating">
-      <input type="file" class="form-control" id="filename"name="filename" multiple="multiple" >
+      <input type="file" class="form-control" id="filename"name="filename"  >
     </div>
 <script>
 $('.summernote').summernote({
@@ -117,6 +118,7 @@ ClassicEditor
 } );
 </script>
 <script type="text/javascript">
+// ${"#title"}.val("제목출력");-->해당 아이디에 value로 들어가게 됨
 let boardForm= document.querySelector("#boardForm");
 boardForm.addEventListener("submit", (e) => {
    e.preventDefault();

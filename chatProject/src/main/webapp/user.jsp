@@ -9,7 +9,9 @@
     <meta charset="UTF-8">
     <title>회원 가입</title>
  
-   
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
 <script type="text/javascript" src="userCheck.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -33,6 +35,36 @@
 	}
   
   </script>
+  
+  <script type="text/javascript">
+  
+  function fn_process(){
+	  
+var _id=$("#uid").val();
+if(_id==" "){
+alert("id를 입력하세요");
+return;
+}
+	$.ajax({
+		type:"post",
+		async:true,
+		url:"http://localhost:8880/chatProject/register",
+		dataType:"text",
+		data:{id:_id},
+		success:function(data,textStatus){
+			if(data=="usable"){
+				$('#message').text("사용할 수 있는 아이디");
+				$('#btn_duplicate').prop("disabled",true);
+			}
+			else{
+				$('#message').text("사용할 수 없는 아이디");
+			}
+		},error:function(data,textStatus){
+			alert("에러가 발생했습니다");
+		}
+	});
+  }
+  </script>
   <article>
 
      <div class="registration-form">
@@ -42,6 +74,10 @@
             </div>
             <div class="form-group">
                 <input type="text" class="form-control item" id="uid"name="uid" placeholder="아이디"  required>
+            </div>
+            <input type="button" id="btn_duplicate" value="중복체크" onclick="fn_process()"/><br>
+            <div id="message">
+            
             </div>
             <div class="form-group">
                 <input type="password" class="form-control item"  id="pwd1"name="pwd1" placeholder="비밀번호"  required>
