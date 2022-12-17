@@ -72,15 +72,7 @@ a {
 </head>
 <body>
  
-<%
-   request.setCharacterEncoding( "utf-8" );
-   String type = request.getParameter("type");
-   String content=request.getParameter("SearchContent");
-   Board board=new Board();
-   BoardDB db=BoardDB.getInstance();
-   List boardList=db.searchBoards(type,content);
 
-%>
 <jsp:include page="navBar.jsp"/>
 
 <div class="form" align="center">
@@ -111,33 +103,25 @@ a {
                     <th style="font-weight: bold; font-size: 16px;">등록시간</th>
                     <th style="font-weight: bold; font-size: 16px;">조회수</th>
                 </tr>
-<%	
-   for (int i=0; i < boardList.size(); i++){
-      Board vo=(Board) boardList.get(i);
-      String id=vo.getId();
-      String uid=vo.getUserid();
-      String name=vo.getName();
-      String title=vo.getTitle();
-      String content1=vo.getContent();
-      String type1=vo.getType();
-      String time=vo.getTime();
-      int count=vo.getCount();
-
-%>  
+<c:choose>
+<c:when test="${empty articlesList }">
+등록된 글이 없습니다
+</c:when>
+<c:when test="${!empty articlesList }">
+<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 <tr class="table-secondary text-center" style="font-weight: bold; cursor:pointer;" onclick="#">
-                    <td ><%= i+1%></td>
-                    <td><%= type1 %></td>
-                    <td class="con" style="width:50%"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;&nbsp;<a href="boardList/view?id=<%=id %>"><%= title %></a></td>
-                      <td ><%= name%>(<%=uid %>)</td>
-                    <td><%=time  %></td>
-                    <td ><%=count  %></td>
+                    <td >${articleNum.count }</td>
+                    <td>${article.type}</td>
+                    <td class="con" style="width:50%"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;&nbsp;<a href="boardList/view?id=${article.id }">${article.title }</a></td>
+                      <td >${article.name}(${article.userid})</td>
+                    <td>${article.time}</td>
+                    <td >${article.count}</td>
                 </tr>
-    
+    </c:forEach>
+    </c:when>
+    </c:choose>
      
-                
-<%		
-   }
-%>	
+
 </table>
 
 </body>
