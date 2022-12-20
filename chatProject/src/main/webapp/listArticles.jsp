@@ -33,9 +33,7 @@ background-color: lightblue;
     transition: 0.25s;
 }
 
-a {
-  text-decoration: none;
-}
+
   td {
         text-align: center;
       }
@@ -89,16 +87,17 @@ a {
 <jsp:include page="navBar.jsp"/>
 
 <div class="form" align="center">
-<form method="post" action="./listArticles.do">
+<form method="post" name="searchForm"  action="./listArticles.do">
   <select class="form-select" id="type" name="type" aria-label="Default select example" required>
-  <option selected>선택</option>
-    <option value="all">전체</option>
-  <option value="userid">작성자 아이디</option>
+  <option selected value="all">전체</option>
   <option value="title">제목</option>
   <option value="content">내용</option>
+  <option value="userid">작성자 아이디</option>
+  <option value="username">작성자 이름</option>
 </select>
-<input type="text" id="content"name="content">
-<button class="w-btn w-btn-blue" type="submit">
+<input type="hidden" name="pageNo" id="pageNo" value="${currentPageNo}"/>
+<input type="text" id="content"name="content"value="${param.text}">
+<button class="w-btn w-btn-blue" onclick="jsSearch()"  type="submit">
  <i class="bi bi-search" style="font-size: 10px"></i>
     </button>
     <button class="w-btn w-btn-blue" type="button" onclick="location.href='./articleForm.do'">
@@ -108,13 +107,13 @@ a {
 </form></div>
 <table id="boardTable" class="table table-sm table-hover" style="margin-left: auto; margin-right: auto;">
             <thead style="border-top: 1px solid #dee2e6;" >
-                <tr class="text-center"  bgcolor="lightblue" style="font-weight: bold"; >
-                    <th style="font-weight: bold; font-size: 16px;">번호</th>
-                    <th style="font-weight: bold; font-size: 16px;">유형</th>
-                       <th style="font-weight: bold; font-size: 16px;">제목</th>
-                    <th style="font-weight: bold; font-size: 16px;">작성자</th>
-                    <th style="font-weight: bold; font-size: 16px;">등록시간</th>
-                    <th style="font-weight: bold; font-size: 16px;">조회수</th>
+                <tr class="text-center"  bgcolor="lightblue" style="font-weight: bold" >
+                    <th style="font-weight: bold; font-size: 16px; text-align: center;">번호</th>
+                    <th style="font-weight: bold; font-size: 16px;text-align: center;">유형</th>
+                       <th style="font-weight: bold; font-size: 16px;text-align: center;">제목</th>
+                    <th style="font-weight: bold; font-size: 16px;text-align: center;">작성자</th>
+                    <th style="font-weight: bold; font-size: 16px;text-align: center;">등록시간</th>
+                    <th style="font-weight: bold; font-size: 16px;text-align: center;">조회수</th>
                 </tr>
 <c:choose>
 <c:when test="${empty articlesList }">
@@ -123,9 +122,9 @@ a {
                     </tr>
 </c:when>
 <c:when test="${!empty articlesList }">
-<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
+<c:forEach var="article" items="${articlesList }" varStatus="i">
 <tr class="table-secondary text-center" style="font-weight: bold; cursor:pointer;" onclick="#">
-                    <td >${articleNum.count }</td>
+                    <td >${((currentPageNo-1)*10+i.index)+1}</td>
                     <td>${article.type}</td>
                     <c:choose>
                     <c:when test="${article.id ne article.parent_no }">
@@ -145,6 +144,47 @@ a {
      
 
 </table>
+<div class="paging" style="text-align: center;">
 
+	<c:if test="${currentPageNo != 1}">
+		<a href="javascript:movePage(1)"> &lt;&lt; </a>
+		&nbsp;
+		<a href="javascript:movePage(${currentPageNo-1})"> &lt; </a>
+		&nbsp;
+	</c:if>
+	
+	<c:forEach var="pageNo" begin="${startPageNo}" end="${endPageNo}">
+		<c:choose>
+			<c:when test="${currentPageNo == pageNo}">
+				<span style="font-size:1.3rem;">${pageNo}</span>
+			</c:when>
+			<c:otherwise>
+				<a href="javascript:movePage(${pageNo})">${pageNo}</a>
+			</c:otherwise>
+		</c:choose>
+		&nbsp;
+	</c:forEach>
+	
+	<c:if test="${currentPageNo != totalPageNo}">
+		<a href="javascript:movePage(${currentPageNo+1})"> &gt; </a>
+		&nbsp;
+		<a href="javascript:movePage(${totalPageNo})"> &gt;&gt; </a>
+	</c:if>
+	<br>
+
+	
+
+</div>
+	
+<script type="text/javascript">
+function movePage(pageNo) {
+	document.querySelector("#pageNo").value = pageNo; 
+	searchForm.submit();
+}
+function jsSearch() {
+	document.querySelector("#pageNo").value = 1; 
+	searchForm.submit();
+}
+</script>
 </body>
 </html>

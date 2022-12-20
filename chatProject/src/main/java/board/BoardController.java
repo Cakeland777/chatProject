@@ -74,19 +74,36 @@ public class BoardController extends HttpServlet {
 		try {
 			List<Board> articlesList = new ArrayList<Board>();
 			if (action == null) {
-				String content = request.getParameter("content");
-				String type = request.getParameter("type");
-				articlesList = BoardService.listArticles(type, content);
-				request.setAttribute("articlesList", articlesList);
+				nextPage = "./listArticles.do";
+			}
 
-			} else if (action.equals("/listArticles.do")) {
+			else if (action.equals("/listArticles.do")) {
+				request.setCharacterEncoding("UTF-8");
 				String content = request.getParameter("content");
 				String type = request.getParameter("type");
-				articlesList = BoardService.listArticles(type, content);
-				request.setAttribute("articlesList", articlesList);
+				String pageNoStr = request.getParameter("pageNo");
+				if ("".equals(pageNoStr) || null == pageNoStr)
+					pageNoStr = "1";
+				int pageNo = Integer.parseInt(pageNoStr);
+				int pageSize = 10;
+				int totalPageNo = boardService.getTotalPage(type, content);
+				int startPageNo = ((pageNo - 1) / pageSize) * pageSize + 1;
+				int endPageNo = startPageNo + pageSize - 1;
+
+				if (endPageNo > totalPageNo)
+					endPageNo = totalPageNo;
+
+				List<Board> list = boardService.listArticles(type, content, pageNo);
+				request.setAttribute("articlesList", list);
+				request.setAttribute("pageSize", pageSize);
+				request.setAttribute("totalPageNo", totalPageNo);
+				request.setAttribute("startPageNo", startPageNo);
+				request.setAttribute("endPageNo", endPageNo);
+				request.setAttribute("currentPageNo", pageNo);
 				nextPage = "/listArticles.jsp";
+			}
 
-			} else if (action.equals("/articleForm.do")) {
+			else if (action.equals("/articleForm.do")) {
 				nextPage = "/BoardForm.jsp";
 
 			} else if (action.equals("/removeArticle.do")) {

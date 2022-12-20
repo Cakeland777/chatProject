@@ -29,7 +29,6 @@ public class BoardDB {
 
 	public void open() {
 		try {
-			System.out.println("JDBC 드라이버 로딩 성공");
 			Context context = new InitialContext();
 			Context envContext = (Context) context.lookup("java:/comp/env");
 			DataSource dataSource = (DataSource) envContext.lookup("jdbc/pro05DB");
@@ -271,15 +270,14 @@ public class BoardDB {
 		int count = 0;
 
 		try {
-			// 디비연결
 			open();
 			String sql = "select count(*) from board";
 			pstmt = conn.prepareStatement(sql);
-			// 실행 -> rs저장
+
 			ResultSet rs = pstmt.executeQuery();
-			// 데이터처리
+
 			if (rs.next()) {
-				count = rs.getInt(1); // 데이터가 없으면 null이고 return 0값이 된다.
+				count = rs.getInt(1);
 
 			}
 		} catch (Exception e) {
@@ -329,67 +327,126 @@ public class BoardDB {
 		}
 	}
 
-	public List searchBoards(String type, String content) {
-		List boardList = new ArrayList();
+	public int totalPageNo(String type, String content) {
+		int totalPageSize = 0;
+		final int rowSize = 10;
 		try {
 			open();
-			String sql = "select * from board";
+			String sql = "select ceil(COUNT(*) / ? ) from board";
 			if ((content != null && content.length() != 0)) {
 
 				if (type.equals("title")) {
-					sql += " where title like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no, id asc";
+					sql += " where title like ?";
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(1, rowSize);
+					pstmt.setString(2, "%" + content + "%");
 
 				} else if (type.equals("content")) {
-					sql += " where content like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no,id asc";
+					sql += " where content like ?";
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(1, rowSize);
+					pstmt.setString(2, "%" + content + "%");
 				} else if (type.equals("all")) {
-					sql += " where (name || content || userid || title) like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no, id asc";
+					sql += " where (name || content || userid || title) like ?";
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(1, rowSize);
+					pstmt.setString(2, "%" + content + "%");
 				} else if (type.equals("userid")) {
-					sql += " where userid like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), parent_no,id asc";
+					sql += " where userid like ?";
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(1, rowSize);
+					pstmt.setString(2, "%" + content + "%");
 				} else if (type.equals("username")) {
-					sql += " where name like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no, id asc";
+					sql += " where name like ?";
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(1, rowSize);
+					pstmt.setString(2, "%" + content + "%");
 				}
 			} else {
-				sql += " order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), parent_no,id asc";
+
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, rowSize);
 			}
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				String id = rs.getString("id");
-				String userid = rs.getString("userid");
-				String title = rs.getString("title");
-				String content1 = rs.getString("content");
-				String type1 = rs.getString("type");
-				String time = rs.getString("time");
-				String name = rs.getString("name");
-				int count = rs.getInt("count");
-				String parent_no = rs.getString("parent_no");
-				Board vo = new Board();
-				vo.setId(id);
-				vo.setUserid(userid);
-				vo.setTitle(title);
-				vo.setContent(content1);
-				vo.setType(type1);
-				vo.setTime(time);
-				vo.setName(name);
-				vo.setCount(count);
-				vo.setParent_no(parent_no);
-				boardList.add(vo);
-			}
-			close();
 
+			if (rs.next()) {
+				totalPageSize = rs.getInt(1);
+			}
+			rs.close();
+			pstmt.close();
+			close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return boardList;
+		return totalPageSize;
+
 	}
+
+	public List<Board> searchBoards(String type, String content, int pageNo) {
+		List<Board> list = new ArrayList<>();
+		final int rowSize = 10;
+		try {
+
+			open();
+			String sql = "select * from(select row_number() over(order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no,id asc) "
+					+ "num,A.* from board A order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no,id asc)";
+
+			if ((content != null && content.length() != 0)) {
+
+				if (type.equals("title")) {
+					sql += " where title like ? and num between ? and ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(2, ((pageNo - 1) * rowSize) + 1);
+					pstmt.setInt(3, ((pageNo - 1) * rowSize) + rowSize);
+
+				} else if (type.equals("content")) {
+					sql += " where content like ? and num between ? and ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(2, ((pageNo - 1) * rowSize) + 1);
+					pstmt.setInt(3, ((pageNo - 1) * rowSize) + rowSize);
+				} else if (type.equals("all")) {
+					sql += " where (name || content || userid || title) like ? and num between ? and ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(2, ((pageNo - 1) * rowSize) + 1);
+					pstmt.setInt(3, ((pageNo - 1) * rowSize) + rowSize);
+				} else if (type.equals("userid")) {
+					sql += " where userid like ? and num between ? and ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(2, ((pageNo - 1) * rowSize) + 1);
+					pstmt.setInt(3, ((pageNo - 1) * rowSize) + rowSize);
+				} else if (type.equals("username")) {
+					sql += " where name like ? and num between ? and ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "%" + content + "%");
+					pstmt.setInt(2, ((pageNo - 1) * rowSize) + 1);
+					pstmt.setInt(3, ((pageNo - 1) * rowSize) + rowSize);
+				}
+			} else {
+				sql += " where num between ? and ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, ((pageNo - 1) * rowSize) + 1);
+				pstmt.setInt(2, ((pageNo - 1) * rowSize) + rowSize);
+			}
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Board board = new Board(rs.getString("id"), rs.getString("userid"), rs.getString("title"),
+						rs.getString("content"), rs.getString("type"), rs.getString("time"), rs.getString("name"),
+						rs.getInt("count"), rs.getString("parent_no"));
+				System.out.println(board);
+				list.add(board);
+			}
+			rs.close();
+			pstmt.close();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

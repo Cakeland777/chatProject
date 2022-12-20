@@ -27,7 +27,6 @@ public class BoardFileDB {
 
 	public void open() {
 		try {
-			System.out.println("JDBC 드라이버 로딩 성공");
 			Context context = new InitialContext();
 			Context envContext = (Context) context.lookup("java:/comp/env");
 			DataSource dataSource = (DataSource) envContext.lookup("jdbc/pro05DB");

@@ -12,9 +12,9 @@ public class BoardService {
 		BoardDB db = BoardDB.getInstance();
 	}
 
-	public static List<Board> listArticles(String type, String content) {
+	public List<Board> listArticles(String type, String content, int page) {
 		BoardDB db = BoardDB.getInstance();
-		List<Board> articlesList = db.searchBoards(type, content);
+		List<Board> articlesList = db.searchBoards(type, content, page);
 		return articlesList;
 
 	}
@@ -29,6 +29,13 @@ public class BoardService {
 		BoardDB db = BoardDB.getInstance();
 		String number = db.insertReply(board);
 		return number;
+	}
+
+	public int getTotalPage(String type, String content) {
+		BoardDB db = BoardDB.getInstance();
+		int num = db.totalPageNo(type, content);
+		return num;
+
 	}
 
 	public void addArticleFile(String number, String name, String realname, String content, Long length)
