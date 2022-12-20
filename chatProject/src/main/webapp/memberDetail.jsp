@@ -36,8 +36,8 @@
    
     <script type="text/javascript" src="userCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="css/register.css">
-    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/button.css">
   </head>
   <body> 
  <jsp:include page="navBar.jsp"/>
@@ -63,7 +63,7 @@ function btn(){
 		    	  showConfirmButton: false,
 		    	  timer: 1500
 		    	})
-		    setTimeout("location.href='DeleteMember'",2000);
+		    setTimeout("location.href ='./deleteMember.do'",2000);
 		    return true
 		  }
 		})
@@ -105,9 +105,9 @@ function btn(){
       <label for="floatingInput">성별</label>
     </div>
 <div class="button_container" >
-     			<button type="submit"class="btn" formaction='memberUpdate.jsp' ><span>회원정보수정</span></button>
+     			<button type="submit"class="btn" formaction='./updateMemberForm.do' ><span>회원정보수정</span></button>
      			<button type="button"class="btn" onclick="return btn()"  ><span>회원탈퇴</span></button>
-              <button type="button" class="btn" onclick="location.href='index.jsp'" ><span>돌아가기</span></button>
+              <button type="button" class="btn" onclick="location.href='../index.jsp'" ><span>돌아가기</span></button>
           </div>
         </form>
        </div>

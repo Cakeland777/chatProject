@@ -59,7 +59,7 @@ public class MemberDB {
 	}
 
 	public List<Member> memberList() {
-		List<Member> list = new ArrayList<>();
+		List<Member> list = new ArrayList<Member>();
 
 		try {
 			open();
@@ -336,28 +336,26 @@ public class MemberDB {
 		return result;
 	}
 
-	public boolean overlappedID(String id) {
-		boolean result = false;
+	public int overlappedID(String id) {
+		int idCheck = 0;
 		try {
 			open();
-			String sql = "select decode(count(*),1,'true','false') as result from chat_member where userid=?";
+			String sql = "select * from chat_member where userid=?";
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			result = Boolean.parseBoolean(rs.getString("result"));
+			if (rs.next()) {
+				idCheck = 0;
+			} else {
+				idCheck = 1;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		return result;
+		return idCheck;
 	}
 }
-//		   public static void main(String [] args) {
-//		      MemberRepositoryDB memberRepositoryDB = new MemberRepositoryDB();
-//		      List<Member> list = memberRepositoryDB.memberList();
-//		      
-//		      System.out.println(list);
-//		   }

@@ -62,15 +62,13 @@
    <jsp:include page="navBar.jsp"/>
     <div class="registration-form">
 
-      <form method="post" id="boardForm" name="boardForm" enctype="multipart/form-data">
+      <form method="post" id="replyForm" name="replyForm" enctype="multipart/form-data">
         <fieldset>
     
-  <select class="form-select" id="type" name="type" aria-label="Default select example" required>
-  <option value="일반">게시글 유형을 선택해주세요</option>
-  <option value="공지사항">공지사항</option>
-  <option value="일반">일반</option>
-  <option value="Q&A">Q&A</option>
-</select>
+         <div class="form-floating">
+      <input type="text" class="form-control" id="type" name="type"  value="${type}" readonly="readonly">
+      <label for="floatingInput">게시글 유형 </label>
+    </div>
          <div class="form-floating">
       <input type="text" class="form-control" id="uid" name="uid"  value="${user.uid}" readonly="readonly">
       <label for="floatingInput">작성자</label>
@@ -78,6 +76,10 @@
          <div class="form-floating">
       <input type="hidden" class="form-control" id="name" name="name"  value="${user.name}" readonly="readonly">
       <label for="floatingInput"></label>
+    </div>
+         <div class="form-floating">
+      <input type="text" class="form-control" id="id"name="id"  value="${id }"required>
+      <label for="floatingInput">답변글</label>
     </div>
      <div class="form-floating">
       <input type="text" class="form-control" id="title"name="title" required>
@@ -120,11 +122,11 @@ ClassicEditor
 </script>
 <script type="text/javascript">
 
-let boardForm= document.querySelector("#boardForm");
+let boardForm= document.querySelector("#replyForm");
 boardForm.addEventListener("submit", (e) => {
    e.preventDefault();
 
-   fetch('/chatProject/board/addArticle.do', 
+   fetch('/chatProject/board/replyArticle.do', 
       {
 		method : 'POST',
 	    cache: 'no-cache',
@@ -135,7 +137,7 @@ boardForm.addEventListener("submit", (e) => {
 		Swal.fire({
 			  position: 'center',
 			  icon:'success',
-			  title: '등록완료',
+			  title: '답변등록완료',
 			  showConfirmButton: false,
 			  timer: 1500
 			});
@@ -148,7 +150,7 @@ boardForm.addEventListener("submit", (e) => {
 </script>
         </fieldset>
      <div class="button_container" >
-          <input type="submit" name="write" class="btn" value="등록하기">
+          <input type="submit" name="write" class="btn" value="답글 작성">
           <input type="reset" class="btn" onclick="location.href='listArticles.do'"  value="취소">
 
         </div>

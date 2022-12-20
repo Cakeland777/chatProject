@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"
     import="member.*"
     import="board.*"%>
-<%
-String Boardid=request.getParameter("id");
-String BoardTitle=request.getParameter("title");
-String BoardContent=request.getParameter("content");
-%>
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -43,14 +39,14 @@ String BoardContent=request.getParameter("content");
     </style>
    
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="css/register.css">
-     <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="../css/register.css">
+     <link rel="stylesheet" href="../css/button.css">
   </head>
   <body> 
   <jsp:include page="navBar.jsp"/>
       <div class="registration-form">
 
-      <form action ="UpdateBoard" method="post" name="boardForm">
+      <form action ="./updateArticle.do" method="post" name="updateForm">
         <fieldset>
  
      <div class="form-floating">
@@ -61,23 +57,21 @@ String BoardContent=request.getParameter("content");
       <input type="text" class="form-control" id="name" name="name"  value="${user.name}" readonly="readonly">
       <label for="floatingInput">작성자 이름</label>
     </div>
-  <select class="form-select" id="type" name="type" aria-label="Default select example" required>
-  <option selected>게시글 유형을 선택해주세요</option>
-  <option value="공지사항">공지사항</option>
-  <option value="일반">일반</option>
-  <option value="Q&A">Q&A</option>
-</select>
+        <div class="form-floating">
+      <input type="text" class="form-control" id="type" name="type"  value="${board.type}" readonly="readonly">
+      <label for="floatingInput">게시글 유형</label>
+    </div>
         
      <div class="form-floating">
-      <input type="text" class="form-control" id="title"name="title" value="<%=BoardTitle%>" required>
+      <input type="text" class="form-control" id="title"name="title" value="${board.title }" required>
       <label for="floatingInput">제목</label>
     </div>
     <div class="form-floating">
-      <input type="hidden" class="form-control" id="id"name="id" value="<%=Boardid%>" readonly  required>
+      <input type="hidden" class="form-control" id="id"name="id" value="${board.id}" readonly  required>
       <label for="floatingInput">아이디</label>
     </div>
 <div class="container">
-  <textarea class="summernote" name="content" ></textarea>    
+  <textarea class="summernote" name="content" >${board.content}</textarea>    
 </div>
 <script>
 $('.summernote').summernote({

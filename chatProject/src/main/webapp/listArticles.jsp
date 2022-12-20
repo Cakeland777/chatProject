@@ -65,7 +65,20 @@ a {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
 </style>
-  
+      <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+    <script>
+        jQuery(function($){
+            $("#boardTable").DataTable(
+            		searching: false,
+            		// 정렬 기능 숨기기
+            		ordering: false,
+            		// 정보 표시 숨기기
+            		info: false,
+          
+            );
+        });
+    </script>
 
   <meta charset="UTF-8">
 <title>게시판</title>
@@ -76,7 +89,7 @@ a {
 <jsp:include page="navBar.jsp"/>
 
 <div class="form" align="center">
-<form method="post" action="boardList.jsp">
+<form method="post" action="./listArticles.do">
   <select class="form-select" id="type" name="type" aria-label="Default select example" required>
   <option selected>선택</option>
     <option value="all">전체</option>
@@ -84,16 +97,16 @@ a {
   <option value="title">제목</option>
   <option value="content">내용</option>
 </select>
-<input type="text" id="SearchContent"name="SearchContent">
+<input type="text" id="content"name="content">
 <button class="w-btn w-btn-blue" type="submit">
  <i class="bi bi-search" style="font-size: 10px"></i>
     </button>
-    <button class="w-btn w-btn-blue" type="button" onclick="location.href='BoardForm.jsp'">
+    <button class="w-btn w-btn-blue" type="button" onclick="location.href='./articleForm.do'">
         글 작성
     </button>
 
 </form></div>
-<table class="table table-sm table-hover" style="margin-left: auto; margin-right: auto;">
+<table id="boardTable" class="table table-sm table-hover" style="margin-left: auto; margin-right: auto;">
             <thead style="border-top: 1px solid #dee2e6;" >
                 <tr class="text-center"  bgcolor="lightblue" style="font-weight: bold"; >
                     <th style="font-weight: bold; font-size: 16px;">번호</th>
@@ -105,14 +118,23 @@ a {
                 </tr>
 <c:choose>
 <c:when test="${empty articlesList }">
-등록된 글이 없습니다
+
+                    <td >등록된 글이 없습니다</td>
+                    </tr>
 </c:when>
 <c:when test="${!empty articlesList }">
 <c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 <tr class="table-secondary text-center" style="font-weight: bold; cursor:pointer;" onclick="#">
                     <td >${articleNum.count }</td>
                     <td>${article.type}</td>
-                    <td class="con" style="width:50%"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;&nbsp;<a href="boardList/view?id=${article.id }">${article.title }</a></td>
+                    <c:choose>
+                    <c:when test="${article.id ne article.parent_no }">
+                   <td class="con" style="width:50%;text-align: left;text-indent: 40px; "><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;&nbsp;<a href="./viewArticle.do?id=${article.id}"><span style="font-size: 12px;">[답변] </span>${article.title }</a></td>
+                    </c:when>
+                    <c:otherwise>
+                    <td class="con" style="width:50%; text-align: left;"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;&nbsp;<a href="./viewArticle.do?id=${article.id}">${article.title }</a></td>
+                      </c:otherwise>
+                      </c:choose>
                       <td >${article.name}(${article.userid})</td>
                     <td>${article.time}</td>
                     <td >${article.count}</td>

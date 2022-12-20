@@ -68,7 +68,7 @@ public class BoardDB {
 			while (rs.next()) {
 				Board board = new Board(rs.getString("ID"), rs.getString("USERID"), rs.getString("TITLE"),
 						rs.getString("CONTENT"), rs.getString("TYPE"), rs.getString("TIME"), rs.getString("NAME"),
-						rs.getInt("COUNT"));
+						rs.getInt("COUNT"), rs.getString("PARENT_NO"));
 				list.add(board);
 			}
 			rs.close();
@@ -102,6 +102,7 @@ public class BoardDB {
 				bb.setName(rs.getString("name"));
 				bb.setType(rs.getString("type"));
 				bb.setCount(rs.getInt("count"));
+				bb.setParent_no(rs.getString("parent_no"));
 				boardList.add(bb);
 			}
 		} catch (Exception e) {
@@ -114,7 +115,7 @@ public class BoardDB {
 
 	public String insertBoard(Board board) throws SQLException {
 
-		String sql = "insert into board(id,userid,name,title,content,type) values (seq_id.nextval,?,?,?,?,?) ";
+		String sql = "insert into board(id,userid,name,title,content,type,parent_no) values (seq_id.nextval,?,?,?,?,?,seq_id.nextval) ";
 		open();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, board.getUserid());
@@ -122,6 +123,33 @@ public class BoardDB {
 		pstmt.setString(3, board.getTitle());
 		pstmt.setString(4, board.getContent());
 		pstmt.setString(5, board.getType());
+		pstmt.executeUpdate();
+		pstmt.close();
+
+		String query = "SELECT seq_id.CURRVAL AS id FROM board";
+		pstmt = conn.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		String number = "";
+		if (rs.next()) {
+			number = rs.getString(1);
+		}
+
+		close();
+
+		return number;
+	}
+
+	public String insertReply(Board board) throws SQLException {
+
+		String sql = "insert into board(id,userid,name,title,content,type,parent_no) values (seq_id.nextval,?,?,?,?,?,?) ";
+		open();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, board.getUserid());
+		pstmt.setString(2, board.getName());
+		pstmt.setString(3, board.getTitle());
+		pstmt.setString(4, board.getContent());
+		pstmt.setString(5, board.getType());
+		pstmt.setString(6, board.getParent_no());
 		pstmt.executeUpdate();
 		pstmt.close();
 
@@ -210,6 +238,7 @@ public class BoardDB {
 				viewBoard.setName(rs.getString("name"));
 				viewBoard.setType(rs.getString("type"));
 				viewBoard.setCount(rs.getInt("count"));
+				viewBoard.setParent_no(rs.getString("parent_no"));
 			}
 
 		} catch (SQLException e) {
@@ -308,29 +337,29 @@ public class BoardDB {
 			if ((content != null && content.length() != 0)) {
 
 				if (type.equals("title")) {
-					sql += " where title like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
+					sql += " where title like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no, id asc";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, "%" + content + "%");
 
 				} else if (type.equals("content")) {
-					sql += " where content like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),id desc";
+					sql += " where content like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no,id asc";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, "%" + content + "%");
 				} else if (type.equals("all")) {
-					sql += " where (name || content || userid || title) like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
+					sql += " where (name || content || userid || title) like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no, id asc";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, "%" + content + "%");
 				} else if (type.equals("userid")) {
-					sql += " where userid like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
+					sql += " where userid like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), parent_no,id asc";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, "%" + content + "%");
 				} else if (type.equals("username")) {
-					sql += " where name like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
+					sql += " where name like ? order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2),parent_no, id asc";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, "%" + content + "%");
 				}
 			} else {
-				sql += " order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), id desc";
+				sql += " order by decode(type, '공지사항', 1),decode(type, 'Q&A', 2), parent_no,id asc";
 				pstmt = conn.prepareStatement(sql);
 			}
 			ResultSet rs = pstmt.executeQuery();
@@ -343,6 +372,7 @@ public class BoardDB {
 				String time = rs.getString("time");
 				String name = rs.getString("name");
 				int count = rs.getInt("count");
+				String parent_no = rs.getString("parent_no");
 				Board vo = new Board();
 				vo.setId(id);
 				vo.setUserid(userid);
@@ -352,6 +382,7 @@ public class BoardDB {
 				vo.setTime(time);
 				vo.setName(name);
 				vo.setCount(count);
+				vo.setParent_no(parent_no);
 				boardList.add(vo);
 			}
 			close();

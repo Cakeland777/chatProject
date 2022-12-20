@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"
     import="member.*"
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,16 +41,9 @@ text-align: center;
 </head>
 <body>
 <h2>가입회원정보</h2>
-<%
-request.setCharacterEncoding( "utf-8" );
-   String _name = request.getParameter("name");
-   Member member=new Member();
-   member.setName(_name);
-   MemberDB db=MemberDB.getInstance();
-   List membersList=db.listMembers(member);
-%>
+
 <div class="search">
-<form method="post" action="member.jsp">
+<form method="post" action="./listMembers.do">
 이름:<input type="text" name="name">
 <input type="submit"class="btn btn-outline-secondary" style="margin-bottom: 5px;" value=" 조회하기">
 
@@ -68,46 +62,36 @@ request.setCharacterEncoding( "utf-8" );
      <td></td>
      </div>
 </tr>
-<%	
-   for (int i=0; i < membersList.size(); i++){
-      Member vo=(Member) membersList.get(i);
-      String id=vo.getUid();
-      String pwd=vo.getPwd();
-      String name=vo.getName();
-      String email=vo.getEmail();
-      String address=vo.getAddress();
-      String sex=vo.getSex();
-      String phone=vo.getPhone();
-      String login_check=vo.getLogin_check();
-%>
+
+<c:forEach var="mem" items="${membersList }">
      <tr align=center>
-       <td><%= id %></td>
-       <td><%= pwd %></td>
-       <td><%= name %></td>
-       <td><%= email %></td>
-       <td><%=address  %></td>
-       <td><%=phone  %></td>
-       <td><%=sex %></td>
-       
+       <td>${mem.uid }</td>
+       <td>${mem.pwd }</td>
+       <td>${mem.name }</td>
+       <td>${mem.email }</td>
+       <td>${mem.address }</td>
+       <td>${mem.phone }</td>
+       <td>${mem.sex }</td>
        <td><div id="buttons">
-          <a href="adminDelete?id=<%=id %>">탈퇴처리</a>
-      <%if(login_check.equals("T")){%>
-          <td><a href="adminUse?id=<%=id %>">미사용변경</a>
-          </div></td>
-          <%}
-else{%>
- 		<td><a href="adminUse?id=<%=id %>">사용변경</a>
-          </div></td>
      
-   <%}%>
-   </tr>
-<%		
-   }
-%>	
-    
+          <a href="../adminDelete?id=${mem.uid }">탈퇴처리</a>
+          <c:choose>
+          <c:when test="${mem.login_check eq 'T' }">
+          <td><a href="../adminUse?id=${mem.uid }">미사용변경</a>
+          </div></td>  
+          </c:when>
+		  <c:otherwise>
+ 		<td><a href="../adminUse?id=${mem.uid }">사용변경</a>
+          </div></td>
+            
+  </c:otherwise>
+ 
+</c:choose>	
+ </c:forEach>
+ </tr>
 </table>
    <div id="buttons">
-          <input type="button"  style="margin-top: 5px;" class="btn btn-outline-secondary" onclick="location.href='index.jsp'"  value="돌아가기">
+          <input type="button"  style="margin-top: 5px;" class="btn btn-outline-secondary" onclick="location.href='../index.jsp'"  value="돌아가기">
         </div>
 </body>
 </html>
