@@ -65,7 +65,7 @@ font-weight: bold;
 
   <div class="card-body">
 <i class="bi bi-door-open-fill" width="20" height="20" ></i>
-    <a href="loginForm.jsp" class="btn btn-outline-info stretched-link">로그인</a>
+    <a href="member/loginForm.do" class="btn btn-outline-info stretched-link">로그인</a>
   </div>
 </div><div class="card" style="width: 18rem; " >
   <div class="card-body">
@@ -76,7 +76,7 @@ font-weight: bold;
 <div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-question-circle-fill" color="mediumturquoise"  width="20" height="20"></i>
-    <a href="FindInfo.jsp" class="btn btn-outline-info stretched-link">회원정보 찾기</a>
+    <a href="member/findForm.do" class="btn btn-outline-info stretched-link">회원정보 찾기</a>
   </div>
 </div>
 

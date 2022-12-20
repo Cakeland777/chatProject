@@ -111,6 +111,10 @@ public class MemberController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("./detailMember.do");
 			dispatcher.forward(request, response);
 
+		} else if (action.equals("/loginForm.do")) {
+			response.sendRedirect("../loginForm.jsp");
+		} else if (action.equals("/findForm.do")) {
+			response.sendRedirect("../FindInfo.jsp");
 		}
 
 		else if (action.equals("/logout.do")) {

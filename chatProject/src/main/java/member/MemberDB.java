@@ -342,7 +342,7 @@ public class MemberDB {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
+			if (rs.next() || id == "") {
 				idCheck = 0;
 			} else {
 				idCheck = 1;
