@@ -9,9 +9,7 @@
     <meta charset="UTF-8">
     <title>회원 가입</title>
  
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="userCheck.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -21,51 +19,6 @@
   </head>
   <body> 
   <jsp:include page="navBar.jsp"/>
-  <script>
-
-	 
-  if (${status eq 'fail'}) {
-		Swal.fire({
-			  position: 'center',
-			  icon:'error',
-			  title: '이미 존재하는 아이디입니다',
-			  showConfirmButton: false,
-			  timer: 1500
-			})
-	}
-  
-  </script>
-  
-  <script type="text/javascript">
-  
-  function fn_process(){
-	  
-var _id=$("#uid").val();
-if(_id==" "){
-alert("id를 입력하세요");
-return;
-}
-	$.ajax({
-		type:"post",
-		async:true,
-		url:"http://localhost:8880/chatProject/register",
-		dataType:"text",
-		data:{id:_id},
-		success:function(data,textStatus){
-			if(data=="usable"){
-				$('#message').text("사용할 수 있는 아이디");
-				$('#btn_duplicate').prop("disabled",true);
-			}
-			else{
-				$('#message').text("사용할 수 없는 아이디");
-			}
-		},error:function(data,textStatus){
-			alert("에러가 발생했습니다");
-		}
-	});
-  }
-  </script>
-  <article>
 
      <div class="registration-form">
        <form action ="register" method="post" name="userForm">
@@ -74,11 +27,9 @@ return;
             </div>
             <div class="form-group">
                 <input type="text" class="form-control item" id="uid"name="uid" placeholder="아이디"  required>
+             
             </div>
-            <input type="button" id="btn_duplicate" value="중복체크" onclick="fn_process()"/><br>
-            <div id="message">
-            
-            </div>
+  <font id="checkId" size="2"></font>
             <div class="form-group">
                 <input type="password" class="form-control item"  id="pwd1"name="pwd1" placeholder="비밀번호"  required>
             </div>
@@ -108,12 +59,38 @@ return;
        
 <div class="button_container" >
 
-  <button type="submit" class="btn" onclick="return check()"><span>가입하기</span></button>
+  <button type="submit" id="register"disabled="disabled"  class="btn" onclick="return check()"><span>가입하기</span></button>
   <button type="button" class="btn" onclick="location.href='index.jsp'" ><span>취소</span></button>
           </div>
         </form>
        </div>
-   
+   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script>
+  $("#uid").focusout(function(){
+	  let uid=$("#uid").val();  
+	  $.ajax({
+		  url:"/chatProject/member/IdCheck",
+		  type:"post",
+		  data:{uid:uid},
+		  dataType:"json",
+		  success:function(result){
+			  if(result==0){
+				  $("#checkId").html('사용할 수 없는 아이디');
+				  $("#checkId").attr('color','red');
+				  $("#register").attr("disabled", true);
+			  }else{
+				  $("#checkId").html('사용할 수 있는 아이디');
+				  $("#checkId").attr('color','green');
+				  $("#register").attr("disabled", false);
+			  }
+		  
+		  },
+		  error:function(){
+			  alert("서버요청실패");
+		  }	  
+	  } )
+  })
+  </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   </body>

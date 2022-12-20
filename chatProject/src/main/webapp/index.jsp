@@ -65,18 +65,18 @@ font-weight: bold;
 
   <div class="card-body">
 <i class="bi bi-door-open-fill" width="20" height="20" ></i>
-    <a href="loginForm.jsp" class="btn btn-outline-info stretched-link">로그인</a>
+    <a href="member/loginForm.do" class="btn btn-outline-info stretched-link">로그인</a>
   </div>
 </div><div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-pencil-square"color="mediumturquoise"  width="20" height="20" ></i>
-    <a href="user.jsp" class="btn btn-outline-info stretched-link">회원가입</a>
+    <a href="member/memberForm.do" class="btn btn-outline-info stretched-link">회원가입</a>
   </div>
 </div>
 <div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-question-circle-fill" color="mediumturquoise"  width="20" height="20"></i>
-    <a href="FindInfo.jsp" class="btn btn-outline-info stretched-link">회원정보 찾기</a>
+    <a href="member/findForm.do" class="btn btn-outline-info stretched-link">회원정보 찾기</a>
   </div>
 </div>
 
@@ -90,19 +90,19 @@ font-weight: bold;
 <div class="card" style="width: 18rem; " >
   <div class="card-body">
 <i class="bi bi-info-square"color="mediumturquoise"  width="20" height="20" ></i>
-    <a href="member.jsp" class="btn btn-outline-info stretched-link">가입회원 확인</a>
+    <a href="member/listMembers.do" class="btn btn-outline-info stretched-link">가입회원 확인</a>
   </div>
 </div>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-card-text"color="mediumturquoise"  width="20" height="20"></i>
-    <a href="boardList.jsp" class="btn btn-outline-info stretched-link">게시판</a>
+    <a href="board/listArticles.do" class="btn btn-outline-info stretched-link">게시판</a>
   </div>
 </div>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
-    <a href="logout" class="btn btn-outline-info stretched-link">로그아웃</a>
+    <a href="member/logout.do"class="btn btn-outline-info stretched-link">로그아웃</a>
   </div>
 </div>
 </div>
@@ -116,14 +116,14 @@ font-weight: bold;
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-door-open-fill"color="mediumturquoise"  width="20" height="20" ></i>
-    <a href="logout" class="btn btn-outline-info stretched-link">로그아웃</a>
+    <a href="member/logout.do" class="btn btn-outline-info stretched-link">로그아웃</a>
   </div>
 </div>
 
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-card-text"color="mediumturquoise"  width="20" height="20"></i>
-    <a href="boardList.jsp" class="btn btn-outline-info stretched-link">게시판</a>
+    <a href="board/listArticles.do" class="btn btn-outline-info stretched-link">게시판</a>
   </div>
 </div>
 <div class="card" style="width: 18rem;">
@@ -135,7 +135,7 @@ font-weight: bold;
 <div class="card" style="width: 18rem;">
   <div class="card-body">
 <i class="bi bi-info-square" width="20" height="20"></i>
-    <a href="detailMember" class="btn btn-outline-info stretched-link">마이페이지</a>
+    <a href="member/detailMember.do" class="btn btn-outline-info stretched-link">마이페이지</a>
   </div>
 </div>
 </div>

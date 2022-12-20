@@ -32,21 +32,21 @@
    }
     </style>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
-    <script type="text/javascript" src="updateCheck.js"></script>
+    <script type="text/javascript" src="../updateCheck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="css/register.css">
-     <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="../css/register.css">
+     <link rel="stylesheet" href="../css/button.css">
   </head>
   <body> 
   <jsp:include page="navBar.jsp"/>
  <div id="container">
       <div class="registration-form">
-       <form action ="updateMember"  method="post" name="userForm">
+       <form action ="./updateMember.do"method="post" name="userForm">
             <div class="form-icon">
                 <span><i class="icon icon-pencil"></i></span>
             </div>
      <div class="form-floating">
-      <input type="text" value="${user.uid}"class="form-control" id="uid"name="uid" placeholder="id" readonly="readonly">
+      <input type="text" value="${member.uid}"class="form-control" id="uid"name="uid" placeholder="id" readonly="readonly">
       <label for="floatingInput">아이디</label>
     </div>
           <div class="form-floating">
@@ -58,19 +58,19 @@
       <label for="floatingInput">비밀번호확인</label>
     </div>
            <div class="form-floating">
-      <input type="text" value="${user.name}"class="form-control" id="name"name="name" >
+      <input type="text" value="${member.name}"class="form-control" id="name"name="name" >
       <label for="floatingInput">이름</label>
     </div>
                   <div class="form-floating">
-      <input type="text" value="${user.phone}"class="form-control" id="phone"name="phone" >
+      <input type="text" value="${member.phone}"class="form-control" id="phone"name="phone" >
       <label for="floatingInput">전화번호</label>
     </div>
                        <div class="form-floating">
-      <input type="text" value="${user.email}"class="form-control" id="email"name="email" >
+      <input type="text" value="${member.email}"class="form-control" id="email"name="email" >
       <label for="floatingInput">이메일</label>
     </div>
      <div class="form-floating">
-      <input type="text" value="${user.address}"class="form-control" id="address"name="address" >
+      <input type="text" value="${member.address}"class="form-control" id="address"name="address" >
       <label for="floatingInput">주소</label>
     </div>
   <div class="mb-3">

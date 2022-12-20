@@ -53,12 +53,6 @@ public class registerMember extends HttpServlet {
 		member.setSex(sex);
 		MemberDB db = MemberDB.getInstance();
 		int result = db.insertMember(member);
-		boolean overlappedID = db.overlappedID(id);
-		if (overlappedID == true) {
-			writer.print("not_usable");
-		} else {
-			writer.print("usable");
-		}
 		HttpSession session = request.getSession();
 		if (result == 1) {
 			request.setAttribute("status", "success");
