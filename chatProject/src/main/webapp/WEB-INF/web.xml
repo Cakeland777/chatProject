@@ -47,16 +47,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>BoardDown</display-name>
-    <servlet-name>BoardDown</servlet-name>
-    <servlet-class>board.BoardDown</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BoardDown</servlet-name>
-    <url-pattern>/BoardDown</url-pattern>
-  </servlet-mapping>
+ 
   <servlet>
     <description></description>
     <display-name>BoardController</display-name>

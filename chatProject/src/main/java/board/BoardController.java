@@ -202,7 +202,6 @@ public class BoardController extends HttpServlet {
 				String fileName = boardService.viewArticleFile_Real(id);
 				String orgName = boardService.viewArticleFile(id);
 				File file = new File(fileName);
-				System.out.println(file.getAbsolutePath());
 
 				if (!file.exists()) {
 					response.getWriter().append("file not found");

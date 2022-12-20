@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 페이지</title>
 <style>
 h1{background-color: skyblue;
 color:white;}
@@ -54,14 +54,16 @@ color:white;}
                     <div>
                     ${article.content}
                     </div>
-                              <c:choose>
-		<c:when test ="${fileName ne null}">
-		<img src="./fileDown.do?id=${article.id}"  width=300 height=300 /><br>
+
+<c:choose>
+		<c:when test ="${fileName ne null }">
+   <img src="./fileDown.do?id=${article.id}"  width=300 height=300 /><br> 
                      <div>
                     첨부파일 : <a href="./fileDown.do?id=${article.id}">${fileName}</a>
                     </div>
                     </c:when>
                     </c:choose>
+
                 </div>
             </div>
 

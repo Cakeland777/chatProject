@@ -95,7 +95,7 @@
 $('.summernote').summernote({
 	  height: 300, 
 	  width:450,
-	  minHeight: null,             // 최소 높이
+	  minHeight: null,             
 	  maxHeight: null,  
 	  lang: "ko-KR",
 		  toolbar: [

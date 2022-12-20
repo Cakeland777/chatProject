@@ -437,7 +437,6 @@ public class BoardDB {
 				Board board = new Board(rs.getString("id"), rs.getString("userid"), rs.getString("title"),
 						rs.getString("content"), rs.getString("type"), rs.getString("time"), rs.getString("name"),
 						rs.getInt("count"), rs.getString("parent_no"));
-				System.out.println(board);
 				list.add(board);
 			}
 			rs.close();
