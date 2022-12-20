@@ -73,6 +73,7 @@
 <div class="container">
   <textarea class="summernote" name="content" >${board.content}</textarea>    
 </div>
+	
 <script>
 $('.summernote').summernote({
 	  height: 300, 

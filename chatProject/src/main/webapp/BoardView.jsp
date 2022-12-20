@@ -36,7 +36,12 @@ color:white;}
             <div class="card" style="width: 100%;">
 
                 <div class="card-header">
-                    <span style="font-size: 18px; color: gray;">[${article.type}]</span><strong style="font-size: 18px;">${article.title}</strong>&nbsp;&nbsp;
+                  <c:choose>
+                    <c:when test="${article.id ne article.parent_no }">
+                    <span style="font-size: 18px; color: gray;"> <a href="./viewArticle.do?id=${article.parent_no}">[원글보기]</a></span>
+                    </c:when>
+                    </c:choose>
+                    <span style="font-size: 18px; color: gray;">[${article.type}] </span><strong style="font-size: 18px;">${article.title}</strong>&nbsp;&nbsp;
                     <span style="float:right;">${article.time}</span>
                 </div>
                 <div class="card-body" style="min-height: 400px; color:black;">
