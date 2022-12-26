@@ -74,7 +74,7 @@ text-align: center;
        <td>${mem.sex }</td>
        <td><div id="buttons">
      
-          <a href="../adminDelete?id=${mem.uid }">탈퇴처리</a>
+          <a class="deleteUids" data-uid="${mem.uid}">탈퇴처리</a>
           <c:choose>
           <c:when test="${mem.login_check eq 'T' }">
           <td><a href="../adminUse?id=${mem.uid }">미사용변경</a>
@@ -93,5 +93,36 @@ text-align: center;
    <div id="buttons">
           <input type="button"  style="margin-top: 5px;" class="btn btn-outline-secondary" onclick="location.href='../index.jsp'"  value="돌아가기">
         </div>
+           <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript">
+        $(".deleteUids").on("click", e => {
+        	let aLink = e.target;
+        	
+    		e.preventDefault();
+        	if (!confirm("삭제하시겠습니까?")) return;
+        	
+        	let param = {
+        		uid : aLink.getAttribute("data-uid") 	
+        	};     
+        
+        $.ajax({
+			type:"post"
+			,async: true
+			,url : "<c:url value='/adminDelete'/>"
+			,data : JSON.stringify(param)	
+			,dataType : "JSON"
+			,contentType:"application/json;charset=utf-8"
+			,success : (jsonResult, textStatus) => {
+				alert(jsonResult.message);
+				if (jsonResult.status == true) {
+					searchForm.submit();    			
+				}
+			}
+ 		});
+    });
+        
+        
+        </script>
 </body>
 </html>

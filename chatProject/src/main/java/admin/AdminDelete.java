@@ -1,6 +1,11 @@
 package admin;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+import org.json.JSONObject;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,9 +36,21 @@ public class AdminDelete extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		MemberDB db = MemberDB.getInstance();
-		String id = request.getParameter("id");
-		db.delete(id);
+		PrintWriter out = response.getWriter();
 		response.sendRedirect("member/listMembers.do");
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
+		String jsonStr = in.readLine();
+		System.out.println("jsonStr = " + jsonStr);
+
+		JSONObject jsonMember = new JSONObject(jsonStr);
+		String uid = jsonMember.getString("uid");
+		db.delete(uid);
+		JSONObject jsonResult = new JSONObject();
+		jsonResult.put("status", true);
+		jsonResult.put("message", "회원을 삭제하였습니다.");
+		out.println(jsonResult.toString());
+		return;
 	}
 
 	/**

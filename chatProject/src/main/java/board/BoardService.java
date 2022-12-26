@@ -7,32 +7,33 @@ public class BoardService {
 
 	BoardDB boardDB;
 	BoardFileDB boardFileDB;
+	BoardDB db = BoardDB.getInstance();
 
 	public BoardService() {
-		BoardDB db = BoardDB.getInstance();
+
 	}
 
 	public List<Board> listArticles(String type, String content, int page) {
-		BoardDB db = BoardDB.getInstance();
+
 		List<Board> articlesList = db.searchBoards(type, content, page);
 		return articlesList;
 
 	}
 
 	public String addArticle(Board board) throws SQLException {
-		BoardDB db = BoardDB.getInstance();
+
 		String number = db.insertBoard(board);
 		return number;
 	}
 
 	public String addArticleReply(Board board) throws SQLException {
-		BoardDB db = BoardDB.getInstance();
+
 		String number = db.insertReply(board);
 		return number;
 	}
 
 	public int getTotalPage(String type, String content) {
-		BoardDB db = BoardDB.getInstance();
+
 		int num = db.totalPageNo(type, content);
 		return num;
 
@@ -47,7 +48,6 @@ public class BoardService {
 
 	public Board viewArticle(String id) {
 		Board board = null;
-		BoardDB db = BoardDB.getInstance();
 		board = db.getBoard(id);
 		return board;
 	}
@@ -66,14 +66,14 @@ public class BoardService {
 
 	public int updateAtricle(Board board) {
 		int result = 0;
-		BoardDB db = BoardDB.getInstance();
+
 		result = db.updateBoard(board);
 		return result;
 
 	}
 
 	public void deleteArticle(String id) {
-		BoardDB db = BoardDB.getInstance();
+
 		db.deleteBoard(id);
 
 	}
